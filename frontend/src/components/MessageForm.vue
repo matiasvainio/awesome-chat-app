@@ -24,6 +24,7 @@ export default {
       const newMessage = {
         id: getId(),
         content: this.content,
+        date: new Date(),
       };
       this.$emit('add-message', newMessage);
     },

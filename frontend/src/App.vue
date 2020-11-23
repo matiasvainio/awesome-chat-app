@@ -28,6 +28,7 @@ export default {
   methods: {
     addMessage(message) {
       this.messages = [...this.messages, message];
+      messageService.create(message);
     },
     async getMessages() {
       this.messages = await messageService.getAll();
