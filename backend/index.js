@@ -7,8 +7,6 @@ app.get('/', (request, response) => {
   response.send('Hello World!');
 });
 
-// git test
-
 app.listen(port, () => {
   console.log(`app listenting at http://localhost:${port}`);
 });
