@@ -1,0 +1,19 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "content": "Lorem ipsum dolor sit amet.",
+      "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)"
+    },
+    {
+      "id": 2,
+      "content": "Suspendisse vehicula lacus ut tellus.",
+      "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)"
+    },
+    {
+      "id": 3,
+      "content": "Vivamus malesuada egestas urna, ac.",
+      "date": "Mon Nov 23 2020 16:48:12 GMT+0200 (Eastern European Standard Time)"
+    }
+  ]
+}

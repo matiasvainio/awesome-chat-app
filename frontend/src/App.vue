@@ -7,8 +7,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
+
+const baseUrl = 'http://localhost:3000/messages';
 
 export default {
   name: 'App',
@@ -18,25 +22,22 @@ export default {
   },
   data() {
     return {
-      messages: [
-        {
-          id: 1,
-          content: 'Lorem ipsum dolor sit amet.',
-        },
-        {
-          id: 2,
-          content: 'Suspendisse vehicula lacus ut tellus.',
-        },
-        {
-          id: 3,
-          content: 'Vivamus malesuada egestas urna, ac.',
-        },
-      ],
+      messages: [],
     };
   },
+
+  mounted() {
+    this.getMessages();
+  },
+
   methods: {
     addMessage(message) {
       this.messages = [...this.messages, message];
+    },
+
+    async getMessages() {
+      const response = await axios.get(baseUrl);
+      this.messages = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
     },
   },
 };
