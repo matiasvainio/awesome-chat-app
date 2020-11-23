@@ -7,12 +7,9 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
-
-const baseUrl = 'http://localhost:3000/messages';
+import messageService from './services/messages';
 
 export default {
   name: 'App',
@@ -25,19 +22,15 @@ export default {
       messages: [],
     };
   },
-
   mounted() {
     this.getMessages();
   },
-
   methods: {
     addMessage(message) {
       this.messages = [...this.messages, message];
     },
-
     async getMessages() {
-      const response = await axios.get(baseUrl);
-      this.messages = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      this.messages = await messageService.getAll();
     },
   },
 };

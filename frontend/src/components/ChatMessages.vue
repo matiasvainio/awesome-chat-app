@@ -1,7 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="message in messages" :key="message.id">{{ message.content }}</li>
+      <li v-for="message in messages" :key="message.id">
+        {{ message.content }}
+      </li>
     </ul>
   </div>
 </template>
