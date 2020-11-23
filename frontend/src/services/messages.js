@@ -7,7 +7,7 @@ const getAll = async () => {
   return response.data;
 };
 
-const create = async message => {
+const create = async (message) => {
   const response = await axios.post(baseUrl, message);
   return response.data;
 };
