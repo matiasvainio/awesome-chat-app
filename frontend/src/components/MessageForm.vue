@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="chat-messages">
     <form @submit.prevent="handleForm">
-      <input name="content" v-model="content" type="text" />
+      <input v-model="content" name="content" type="text" />
       <button>Send</button>
     </form>
   </div>
@@ -10,6 +10,7 @@
 <script>
 export default {
   name: 'MessageForm',
+  emits: ['add-message'],
   data() {
     return {
       message: {
@@ -27,6 +28,7 @@ export default {
         date: new Date(),
       };
       this.$emit('add-message', newMessage);
+      content = '';
     },
   },
 };
