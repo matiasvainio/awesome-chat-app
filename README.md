@@ -8,4 +8,3 @@
 - UI
 	- Ulkoasu
 	- Viestien näyttäminen
-	TEsti
