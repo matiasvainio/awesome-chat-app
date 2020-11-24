@@ -1,0 +1,64 @@
+Chatroom:
+{ id: 1,
+  name: 'general'
+},
+{ id: 2,
+  name: 'animechat'
+}
+
+
+Message:
+{ senderId: User.id,
+  sender: User.username, 
+  content: 'howdy', 
+  time_created: new Date(),
+  chatroomId: 1
+},
+{ senderId: User.id,
+  sender: User.username,
+  content: 'good u', 
+  time_created: new Date(),
+  chatroomId: 1
+},
+{ senderId: User.id,
+  sender: User.username,
+  content: 'asdsd', 
+  time_created: new Date(),
+  chatroomId: 2
+},
+
+User:
+{ id: 1,
+ username: 'JumalJoni',
+ password: 'asdasd123'
+},
+{ id: 2,
+  username: 'ForrisonHard',
+  password: 'dsadsa321'
+}
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+app.post('/submit', (req, res) => {
+  console.log({
+    name: req.body.name,
+    message: req.body.message
+  });
+  client.connect(err => {
+    const collection = client.db("chatapp").collection("message");
+    let  message = {sender: req.body.name, content: req.body.message}; 
+    // perform actions on the collection object
+    collection.insertOne(message);
+    if (err) throw err;
+    console.log("1 document inserted");
+    client.close();
+  });
+});
