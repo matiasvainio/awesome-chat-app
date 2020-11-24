@@ -1,21 +1,19 @@
 <template>
-  <div id="app">
+  <div class="home">
     <h1>Awesome chat-app</h1>
-    <ChatMessages
-      class="chat-messages"
-      :messages="messages"
-    />
+    <ChatMessages class="chat-messages" :messages="messages" />
     <MessageForm @add-message="addMessage" />
   </div>
 </template>
 
 <script>
+// @ is an alias to /src
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
-import messageService from './services/messages';
+import messageService from '@/services/messages';
 
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
     ChatMessages,
     MessageForm,
@@ -40,27 +38,4 @@ export default {
 };
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#app {
-  font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#app .chat-messages {
-  margin: auto;
-  width: 50%;
-}
-
-#app h1 {
-  text-align: center;
-}
-</style>
+<style scoped></style>

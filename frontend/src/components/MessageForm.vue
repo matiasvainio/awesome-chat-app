@@ -1,7 +1,11 @@
 <template>
   <div class="chat-messages">
     <form @submit.prevent="handleForm">
-      <input v-model="content" name="content" type="text" />
+      <input
+        v-model="content"
+        name="content"
+        type="text"
+      >
       <button>Send</button>
     </form>
   </div>
