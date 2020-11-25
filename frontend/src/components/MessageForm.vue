@@ -1,32 +1,35 @@
 <template>
-  <div>
+  <div class="chat-messages">
     <form @submit.prevent="handleForm">
-      <input name="content" v-model="content" type="text" />
+      <input v-model="formContent" name="content" type="text" />
       <button>Send</button>
     </form>
   </div>
 </template>
 
 <script>
+import utils from '@/utils/utils';
+
 export default {
   name: 'MessageForm',
+  emits: ['add-message'],
   data() {
     return {
       message: {
         content: '',
       },
+      formContent: '',
     };
   },
   methods: {
     handleForm() {
-      const getId = () => Math.floor(Math.random() * 10000000);
-
       const newMessage = {
-        id: getId(),
-        content: this.content,
+        id: utils.getId(),
+        content: this.formContent,
         date: new Date(),
       };
       this.$emit('add-message', newMessage);
+      this.formContent = '';
     },
   },
 };

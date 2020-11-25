@@ -29,6 +29,33 @@
       "id": 6107555,
       "content": "hahahahahaha",
       "date": "2020-11-23T15:42:13.074Z"
+    },
+    {
+      "id": 8274616,
+      "content": "Css on iha paskaa",
+      "date": "2020-11-24T14:05:13.714Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "Batman",
+      "password": "salasana"
+    },
+    {
+      "id": 7002926,
+      "username": "Superman",
+      "password": "1234"
+    },
+    {
+      "id": 4681892,
+      "username": "Spiderman",
+      "password": "1234"
+    },
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 7002927
     }
   ]
 }

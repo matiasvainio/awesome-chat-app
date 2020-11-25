@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chat-messages">
     <ul>
       <li v-for="message in messages" :key="message.id">
         {{ message.content }}
@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+ul {
+  list-style-type: none;
+}
+</style>
