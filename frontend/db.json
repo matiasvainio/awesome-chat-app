@@ -51,11 +51,28 @@
       "id": 4681892,
       "username": "Spiderman",
       "password": "1234"
+    }
+  ],
+  "login": [
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 1
     },
     {
       "username": "Batman",
       "password": "",
-      "id": 7002927
+      "id": 2
+    },
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 3
+    },
+    {
+      "username": "Superman",
+      "password": "",
+      "id": 4
     }
   ]
 }

@@ -3,6 +3,7 @@
     <h1>Awesome chat-app</h1>
     <ChatMessages class="chat-messages" :messages="messages" />
     <MessageForm @add-message="addMessage" />
+    <button @click="logout">logout</button>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
+import authService from '@/services/auth';
 
 export default {
   name: 'Home',
@@ -33,6 +35,10 @@ export default {
     },
     async getMessages() {
       this.messages = await messageService.getAll();
+    },
+    logout() {
+      authService.logout();
+      this.$router.push('/');
     },
   },
 };

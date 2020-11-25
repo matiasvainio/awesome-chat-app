@@ -16,6 +16,7 @@
 
 <script>
 import userService from '@/services/users';
+import authService from '@/services/auth';
 
 export default {
   components: {},
@@ -25,6 +26,9 @@ export default {
       username: '',
       password: '',
     };
+  },
+  beforeMount() {
+    this.checkIfLoggedIn();
   },
   mounted() {
     this.getUsers();
@@ -40,12 +44,15 @@ export default {
       const foundUser = this.users.find((o) => o.username === username);
 
       if (foundUser) {
-        const user = await userService.login({ username, password });
-        window.localStorage.setItem('loggedChatAppUser', JSON.stringify(user));
+        await authService.login({ username, password });
         this.$router.push('/home');
       }
-
-      console.log('user not found');
+    },
+    checkIfLoggedIn() {
+      const user = window.localStorage.getItem('loggedChatAppUser');
+      if (user) {
+        this.$router.push('/home');
+      }
     },
   },
 };
