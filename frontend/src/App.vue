@@ -10,6 +10,23 @@
   <router-view />
 </template>
 
+<script>
+export default {
+  name: 'App',
+  mounted() {
+    this.checkIfLoggedIn();
+  },
+  methods: {
+    checkIfLoggedIn() {
+      const user = window.localStorage.getItem('loggedChatAppUser');
+      if (user) {
+        this.$router.push('/home');
+      }
+    },
+  },
+};
+</script>
+
 <style>
 * {
   margin: 0;
