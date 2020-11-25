@@ -53,5 +53,16 @@
       "password": "1234"
     }
   ],
-  "login": []
+  "login": [
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 1
+    },
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 2
+    }
+  ]
 }
