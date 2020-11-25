@@ -27,9 +27,11 @@ export default {
       password: '',
     };
   },
+  beforeMount() {
+    this.checkIfLoggedIn();
+  },
   mounted() {
     this.getUsers();
-    this.checkIfLoggedIn();
   },
   methods: {
     async getUsers() {
