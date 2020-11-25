@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import utils from '@/utils/utils';
+
 export default {
   name: 'MessageForm',
   emits: ['add-message'],
@@ -21,10 +23,8 @@ export default {
   },
   methods: {
     handleForm() {
-      const getId = () => Math.floor(Math.random() * 10000000);
-
       const newMessage = {
-        id: getId(),
+        id: utils.getId(),
         content: this.formContent,
         date: new Date(),
       };
