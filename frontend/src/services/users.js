@@ -12,9 +12,4 @@ const create = async (object) => {
   return response.data;
 };
 
-const login = async (credentials) => {
-  const response = await axios.post(baseUrl, credentials);
-  return response.data;
-};
-
-export default { getAll, create, login };
+export default { getAll, create };
