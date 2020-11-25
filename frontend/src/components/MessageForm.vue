@@ -1,11 +1,7 @@
 <template>
   <div class="chat-messages">
     <form @submit.prevent="handleForm">
-      <input
-        v-model="content"
-        name="content"
-        type="text"
-      >
+      <input v-model="formContent" name="content" type="text" />
       <button>Send</button>
     </form>
   </div>
@@ -20,6 +16,7 @@ export default {
       message: {
         content: '',
       },
+      formContent: '',
     };
   },
   methods: {
@@ -28,11 +25,11 @@ export default {
 
       const newMessage = {
         id: getId(),
-        content: this.content,
+        content: this.formContent,
         date: new Date(),
       };
       this.$emit('add-message', newMessage);
-      content = '';
+      this.formContent = '';
     },
   },
 };
