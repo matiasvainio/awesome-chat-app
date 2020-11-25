@@ -34,63 +34,28 @@
       "id": 8274616,
       "content": "Css on iha paskaa",
       "date": "2020-11-24T14:05:13.714Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "Batman",
+      "password": "salasana"
     },
     {
-      "id": 3237248,
-      "content": "toimiiko?",
-      "date": "2020-11-24T14:10:08.246Z"
+      "id": 7002926,
+      "username": "Superman",
+      "password": "1234"
     },
     {
-      "id": 9346412,
-      "content": "no ei",
-      "date": "2020-11-24T14:10:21.421Z"
+      "id": 4681892,
+      "username": "Spiderman",
+      "password": "1234"
     },
     {
-      "id": 4088264,
-      "content": "asd",
-      "date": "2020-11-24T14:10:44.447Z"
-    },
-    {
-      "id": 143363,
-      "content": "sdf",
-      "date": "2020-11-24T21:20:34.826Z"
-    },
-    {
-      "id": 778319,
-      "content": "asd",
-      "date": "2020-11-25T09:29:51.919Z"
-    },
-    {
-      "id": 7106032,
-      "date": "2020-11-25T09:30:03.431Z"
-    },
-    {
-      "id": 4922368,
-      "content": "asddas",
-      "date": "2020-11-25T09:30:17.327Z"
-    },
-    {
-      "id": 6244241,
-      "content": "lul",
-      "date": "2020-11-25T09:39:05.379Z"
-    },
-    {
-      "id": 1499733,
-      "content": "asd",
-      "date": "2020-11-25T09:39:45.473Z"
-    },
-    {
-      "id": 9557609,
-      "date": "2020-11-25T09:40:18.007Z"
-    },
-    {
-      "id": 6915730,
-      "date": "2020-11-25T09:40:21.729Z"
-    },
-    {
-      "id": 1982622,
-      "content": "ads",
-      "date": "2020-11-25T09:40:33.620Z"
+      "username": "Batman",
+      "password": "",
+      "id": 7002927
     }
   ]
 }
