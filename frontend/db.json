@@ -51,43 +51,11 @@
       "id": 4681892,
       "username": "Spiderman",
       "password": "1234"
-    }
-  ],
-  "login": [
-    {
-      "username": "Batman",
-      "password": "",
-      "id": 1
     },
     {
       "username": "Batman",
       "password": "",
-      "id": 2
-    },
-    {
-      "username": "Batman",
-      "password": "",
-      "id": 3
-    },
-    {
-      "username": "Superman",
-      "password": "",
-      "id": 4
-    },
-    {
-      "username": "Batman",
-      "password": "",
-      "id": 5
-    },
-    {
-      "username": "Batman",
-      "password": "",
-      "id": 6
-    },
-    {
-      "username": "Batman",
-      "password": "",
-      "id": 7
+      "id": 7002927
     }
   ]
 }

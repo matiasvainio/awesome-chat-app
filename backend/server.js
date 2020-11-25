@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const axios = require('axios').default;
 const path = require(`path`);
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
@@ -30,9 +31,8 @@ app.post('/submit', (req, res) => {
     message: req.body.message
   });
     const collection = client.db("chatapp").collection("message");
-    let  message = {sender: req.body.name, content: req.body.message}; 
+    const  message = {sender: req.body.name, content: req.body.message};
     // perform actions on the collection object
     collection.insertOne(message);
     console.log("1 document inserted");
-    res.sendFile(path.join(__dirname, '/views/form.html'));
   });
