@@ -27,6 +27,9 @@ export default {
       password: '',
     };
   },
+  beforeMount() {
+    this.checkIfLoggedIn();
+  },
   mounted() {
     this.getUsers();
   },
@@ -42,6 +45,12 @@ export default {
 
       if (foundUser) {
         await authService.login({ username, password });
+        this.$router.push('/home');
+      }
+    },
+    checkIfLoggedIn() {
+      const user = window.localStorage.getItem('loggedChatAppUser');
+      if (user) {
         this.$router.push('/home');
       }
     },
