@@ -1,58 +1,64 @@
 {
   "rooms": [
-    {
-      "id": 1,
-      "name": "animechat",
-      "users": []
-    },
-    {
-      "id": 2,
-      "name": "Politricks",
-      "users": []
-    }
+    "room-1",
+    [
+      "messages",
+      [
+        {
+          "id": 1,
+          "content": "Lorem ipsum dolor sit amet.",
+          "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)",
+          "user": "Batman"
+        }
+      ],
+      "users",
+      [
+        {
+          "username": "Batman"
+        }
+      ]
+    ],
+    "room-2",
+    [
+      "messages",
+      [
+        {
+          "id": 2,
+          "content": "Suspendisse vehicula lacus ut tellus.",
+          "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)",
+          "user": "Spiderman"
+        }
+      ],
+      "users",
+      [
+        {
+          "username": "Batman"
+        },
+        {
+          "username": "Superman"
+        }
+      ]
+    ]
   ],
+
   "messages": [
     {
       "id": 1,
-      "roomId": "1",
       "content": "Lorem ipsum dolor sit amet.",
       "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)",
       "user": "Batman"
     },
     {
       "id": 2,
-      "roomId": "1",
       "content": "Suspendisse vehicula lacus ut tellus.",
       "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)",
       "user": "Spiderman"
     },
     {
       "id": 3,
-      "roomId": "2",
       "content": "Vivamus malesuada egestas urna, ac.",
       "date": "Mon Nov 23 2020 16:48:12 GMT+0200 (Eastern European Standard Time)",
       "user": "Superman"
-    },
-    {
-      "id": 6313731,
-      "roomId": "1",
-      "content": "asd",
-      "date": "2020-11-26T09:51:16.389Z",
-      "user": "Batman"
-    },
-    {
-      "id": 8526467,
-      "roomId": "1",
-      "content": "room 1",
-      "date": "2020-11-26T10:13:24.870Z",
-      "user": "Batman"
-    },
-    {
-      "id": 8633367,
-      "roomId": "2",
-      "content": "room 2",
-      "date": "2020-11-26T10:13:32.099Z",
-      "user": "Batman"
     }
   ],
   "users": [

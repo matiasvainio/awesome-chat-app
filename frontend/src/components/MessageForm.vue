@@ -25,12 +25,12 @@ export default {
     handleForm() {
       const newMessage = {
         id: utils.getId(),
+        roomId: this.$route.params.id,
         content: this.formContent,
         date: new Date(),
         user: utils.getUser(),
       };
 
-      console.log(utils.getUser());
       this.$emit('add-message', newMessage);
       this.formContent = '';
     },
