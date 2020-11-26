@@ -53,6 +53,13 @@
       "content": "room 2",
       "date": "2020-11-26T10:13:32.099Z",
       "user": "Batman"
+    },
+    {
+      "id": 4140972,
+      "roomId": "1",
+      "content": "superman",
+      "date": "2020-11-26T10:15:26.956Z",
+      "user": "Superman"
     }
   ],
   "users": [
@@ -72,5 +79,11 @@
       "password": "1234"
     }
   ],
-  "login": []
+  "login": [
+    {
+      "username": "Superman",
+      "password": "",
+      "id": 1
+    }
+  ]
 }
