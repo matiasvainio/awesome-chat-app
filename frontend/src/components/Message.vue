@@ -6,6 +6,9 @@
     <div class="user">
       {{ message.user }}
     </div>
+    <div class="date">
+      {{ message.date }}
+    </div>
   </div>
 </template>
 
@@ -45,5 +48,8 @@ export default {
 }
 .user {
   font-size: 0.8em;
+}
+.date {
+  font-size: 0.5em;
 }
 </style>
