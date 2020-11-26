@@ -73,7 +73,7 @@ app.post('/login', async (req, res) => {
     const query = {username: username};
     const options = {projection: { _id: 0, password: 1}};
 
-    const user = await collection.find(query, options );
+    const user = await collection.findOne(query, options );
 
     console.log(user);
  
