@@ -60,6 +60,20 @@
       "content": "superman",
       "date": "2020-11-26T10:15:26.956Z",
       "user": "Superman"
+    },
+    {
+      "id": 5534086,
+      "roomId": "1",
+      "content": "Testi vain",
+      "date": "2020-11-26T11:21:53.890Z",
+      "user": "Batman"
+    },
+    {
+      "id": 9895664,
+      "roomId": "2",
+      "content": "Testi 2",
+      "date": "2020-11-26T11:22:29.320Z",
+      "user": "Batman"
     }
   ],
   "users": [
@@ -84,6 +98,16 @@
       "username": "Batman",
       "password": "",
       "id": 1
+    },
+    {
+      "username": "Batman",
+      "password": "Salanana",
+      "id": 2
+    },
+    {
+      "username": "Batman",
+      "password": "Salasana",
+      "id": 3
     }
   ]
 }
