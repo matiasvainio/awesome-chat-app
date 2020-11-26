@@ -1,47 +1,42 @@
 <template>
   <div class="home">
-    <h1>Awesome chat-app</h1>
-    <ChatMessages class="chat-messages" :messages="messages" />
-    <MessageForm @add-message="addMessage" />
-    <button @click="logout">logout</button>
+    <h1>home</h1>
+    <div class="chat-links">
+      <router-link to="/chat/1">
+        <h3>chat 1</h3>
+      </router-link>
+      <router-link to="/chat/2">
+        <h3>chat 2</h3>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import ChatMessages from '@/components/ChatMessages.vue';
-import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
-import authService from '@/services/auth';
 
 export default {
   name: 'Home',
-  components: {
-    ChatMessages,
-    MessageForm,
-  },
-  data() {
-    return {
-      messages: [],
-    };
-  },
   mounted() {
-    this.getMessages();
+    this.foo();
   },
   methods: {
-    addMessage(message) {
-      this.messages = [...this.messages, message];
-      messageService.create(message);
-    },
-    async getMessages() {
-      this.messages = await messageService.getAll();
-    },
-    logout() {
-      authService.logout();
-      this.$router.push('/');
-    },
+    async foo() {},
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-row: 2;
+  grid-column: 2/3;
+}
+
+a h3 {
+  margin: 10px;
+  background-color: pink;
+}
+</style>

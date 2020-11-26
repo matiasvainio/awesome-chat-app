@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="landing">
     <h1>Awesome Chat App</h1>
     <button id="login" @click="handleShow">login</button>
     <button id="signup" @click="handleShow">signup</button>
@@ -32,4 +32,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.landing {
+  grid-column: 2/3;
+}
+</style>

@@ -1,0 +1,82 @@
+{
+  "rooms": [
+    "room-1",
+    [
+      "messages",
+      [
+        {
+          "id": 1,
+          "content": "Lorem ipsum dolor sit amet.",
+          "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)",
+          "user": "Batman"
+        }
+      ],
+      "users",
+      [
+        {
+          "username": "Batman"
+        }
+      ]
+    ],
+    "room-2",
+    [
+      "messages",
+      [
+        {
+          "id": 2,
+          "content": "Suspendisse vehicula lacus ut tellus.",
+          "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)",
+          "user": "Spiderman"
+        }
+      ],
+      "users",
+      [
+        {
+          "username": "Batman"
+        },
+        {
+          "username": "Superman"
+        }
+      ]
+    ]
+  ],
+
+  "messages": [
+    {
+      "id": 1,
+      "content": "Lorem ipsum dolor sit amet.",
+      "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Batman"
+    },
+    {
+      "id": 2,
+      "content": "Suspendisse vehicula lacus ut tellus.",
+      "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Spiderman"
+    },
+    {
+      "id": 3,
+      "content": "Vivamus malesuada egestas urna, ac.",
+      "date": "Mon Nov 23 2020 16:48:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Superman"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "Batman",
+      "password": "salasana"
+    },
+    {
+      "id": 7002926,
+      "username": "Superman",
+      "password": "1234"
+    },
+    {
+      "id": 4681892,
+      "username": "Spiderman",
+      "password": "1234"
+    }
+  ],
+  "login": []
+}

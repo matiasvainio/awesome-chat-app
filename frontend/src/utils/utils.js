@@ -1,3 +1,5 @@
 const getId = () => Math.floor(Math.random() * 10000000);
 
-export default { getId };
+const getUser = () => JSON.parse(window.localStorage.getItem('loggedChatAppUser')).username;
+
+export default { getId, getUser };
