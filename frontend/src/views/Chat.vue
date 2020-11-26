@@ -1,9 +1,7 @@
 <template>
-  <div class="home">
-    <h1>Awesome chat-app</h1>
+  <div class="chat">
     <ChatMessages class="chat-messages" :messages="messages" />
     <MessageForm @add-message="addMessage" />
-    <button @click="logout">logout</button>
   </div>
 </template>
 
@@ -12,7 +10,6 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
-import authService from '@/services/auth';
 
 export default {
   name: 'Chat',
@@ -40,12 +37,12 @@ export default {
       const m = await messageService.getAll();
       this.messages = m.filter((o) => o.roomId === this.$route.params.id);
     },
-    logout() {
-      authService.logout();
-      this.$router.push('/');
-    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.chat {
+  grid-column: 2/3;
+}
+</style>

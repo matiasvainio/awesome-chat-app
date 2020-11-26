@@ -39,11 +39,15 @@ export default {
 .message {
   margin: 0.2em;
   border: 2px black solid;
+  border-radius: 10px;
+  padding: 10px 15px;
   text-align: left;
 }
 .message-notuser {
   margin: 0.2em;
   border: 2px black solid;
+  border-radius: 10px;
+  padding: 10px 15px;
   text-align: right;
 }
 .user {

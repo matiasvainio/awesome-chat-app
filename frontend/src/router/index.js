@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
 import Landing from '../views/Landing.vue';
 import Chat from '../views/Chat.vue';
 
@@ -9,11 +8,6 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
-  },
-  {
-    path: '/',
-    name: 'Login',
-    component: Login,
   },
   {
     path: '/home',
