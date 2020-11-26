@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const axios = require('axios').default;
+const axios = require('axios');
 const path = require(`path`);
 const bodyParser = require('body-parser');
+const { response } = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -25,7 +26,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
 
-app.post('/submit', (req, res) => {
+/*app.post('/submit', (req, res) => {
   console.log({
     name: req.body.name,
     message: req.body.message
@@ -35,4 +36,12 @@ app.post('/submit', (req, res) => {
     // perform actions on the collection object
     collection.insertOne(message);
     console.log("1 document inserted");
-  });
+    console.log(req);
+  });*/
+
+  async function makeGetRequest() {
+    let res = await axios.get('/submit');
+    let data = res.data;
+    console.log(data);
+  }
+  makeGetRequest();

@@ -1,39 +1,65 @@
 {
-  "messages": [
+  "rooms": [
     {
       "id": 1,
-      "content": "Lorem ipsum dolor sit amet.",
-      "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)"
+      "name": "animechat",
+      "users": []
     },
     {
       "id": 2,
+      "name": "Politricks",
+      "users": []
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "roomId": "1",
+      "content": "Lorem ipsum dolor sit amet.",
+      "date": "Mon Nov 23 2020 16:18:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Batman"
+    },
+    {
+      "id": 2,
+      "roomId": "1",
       "content": "Suspendisse vehicula lacus ut tellus.",
-      "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)"
+      "date": "Mon Nov 23 2020 16:38:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Spiderman"
     },
     {
       "id": 3,
+      "roomId": "2",
       "content": "Vivamus malesuada egestas urna, ac.",
-      "date": "Mon Nov 23 2020 16:48:12 GMT+0200 (Eastern European Standard Time)"
+      "date": "Mon Nov 23 2020 16:48:12 GMT+0200 (Eastern European Standard Time)",
+      "user": "Superman"
     },
     {
-      "id": 8147896,
+      "id": 6313731,
+      "roomId": "1",
       "content": "asd",
-      "date": "2020-11-23T15:41:54.946Z"
+      "date": "2020-11-26T09:51:16.389Z",
+      "user": "Batman"
     },
     {
-      "id": 1858638,
-      "content": "hehehehe",
-      "date": "2020-11-23T15:42:09.555Z"
+      "id": 8526467,
+      "roomId": "1",
+      "content": "room 1",
+      "date": "2020-11-26T10:13:24.870Z",
+      "user": "Batman"
     },
     {
-      "id": 6107555,
-      "content": "hahahahahaha",
-      "date": "2020-11-23T15:42:13.074Z"
+      "id": 8633367,
+      "roomId": "2",
+      "content": "room 2",
+      "date": "2020-11-26T10:13:32.099Z",
+      "user": "Batman"
     },
     {
-      "id": 8274616,
-      "content": "Css on iha paskaa",
-      "date": "2020-11-24T14:05:13.714Z"
+      "id": 4140972,
+      "roomId": "1",
+      "content": "superman",
+      "date": "2020-11-26T10:15:26.956Z",
+      "user": "Superman"
     }
   ],
   "users": [
@@ -51,11 +77,13 @@
       "id": 4681892,
       "username": "Spiderman",
       "password": "1234"
-    },
+    }
+  ],
+  "login": [
     {
       "username": "Batman",
       "password": "",
-      "id": 7002927
+      "id": 1
     }
   ]
 }
