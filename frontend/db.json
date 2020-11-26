@@ -79,11 +79,5 @@
       "password": "1234"
     }
   ],
-  "login": [
-    {
-      "username": "Superman",
-      "password": "",
-      "id": 1
-    }
-  ]
+  "login": []
 }
