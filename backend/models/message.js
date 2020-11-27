@@ -1,9 +1,25 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
-var MessageSchema = new mongoose.Schema({
-  sender: String,
-  created_date: { type: Date, default: Date.now },
-  content: String
+const messageSchema = new mongoose.Schema({
+  id: Number,
+  roomId: Number,
+  content: String,
+  date: { type: Date, default: Date.now },
+  user: String
 });
 
-module.exports = mongoose.model('Message', MessageSchema);
+messageSchema.set('toJSON', {
+  transform: (doc, object) => {
+    const returnableObject = object;
+    returnableObject.id = object._id;
+    delete returnableObject.__v;
+    delete returnableObject.passwordHash;
+    return returnableObject;
+  },
+});
+
+messageSchema.plugin(uniqueValidator);
+
+const Message = mongoose.model('Message', messageSchema);
+module.exports = Message;
