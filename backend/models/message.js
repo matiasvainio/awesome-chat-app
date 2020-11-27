@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const messageSchema = new mongoose.Schema({
-  id: Number,
   roomId: Number,
   content: String,
   date: { type: Date, default: Date.now },
-  user: String
+  user: String,
 });
 
 messageSchema.set('toJSON', {
