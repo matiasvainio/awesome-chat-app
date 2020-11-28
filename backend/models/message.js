@@ -11,7 +11,6 @@ const messageSchema = new mongoose.Schema({
 messageSchema.set('toJSON', {
   transform: (doc, object) => {
     const returnableObject = object;
-    returnableObject.id = object._id;
     delete returnableObject.__v;
     delete returnableObject.passwordHash;
     return returnableObject;

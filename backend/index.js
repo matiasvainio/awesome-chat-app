@@ -1,13 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require(`path`);
 const message = require('./routes/message.js');
 const room = require('./routes/room.js');
 const user = require('./routes/user.js');
 
 const app = express();
-const router = express.Router();
 app.use(cors());
 app.use('/message', message);
 app.use('/room', room);
