@@ -28,6 +28,7 @@ export default {
   methods: {
     async addMessage(message) {
       const newMessage = await messageService.create(message);
+      console.log('newmessage', newMessage);
       this.messages = [...this.messages, newMessage];
     },
     async getMessages() {

@@ -9,7 +9,7 @@
     <div class="date">
       {{ message.date }}
     </div>
-    <button @click="removeMessage">x</button>
+    <button v-if="isUser" @click="removeMessage">x</button>
   </div>
 </template>
 

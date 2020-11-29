@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>home</h1>
+    <h3>{{ user }}</h3>
     <div class="room-links" v-for="room in rooms" :key="room.id">
       <router-link :to="`/chat/${room.roomId}`">
         <h3>{{ room.roomName }}</h3>
@@ -11,12 +12,14 @@
 
 <script>
 import messageService from '@/services/messages';
+import utils from '../utils/utils';
 
 export default {
   name: 'Home',
   data() {
     return {
       rooms: [],
+      user: utils.getUser(),
     };
   },
   mounted() {

@@ -17,6 +17,7 @@
 <script>
 import userService from '@/services/users';
 import authService from '@/services/auth';
+import utils from '../utils/utils';
 
 export default {
   components: {},
@@ -47,7 +48,7 @@ export default {
       const user = await authService.login({ username: this.username, password: this.password });
       if (user.status === 200) {
         this.$router.push('/home');
-        window.localStorage.setItem('loggedChatAppUser', user.data);
+        utils.setUser(user);
       }
     },
   },
