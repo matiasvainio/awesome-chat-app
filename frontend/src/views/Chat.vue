@@ -35,7 +35,7 @@ export default {
       // const m = await messageService.getRoomMessages(this.$route.params.id);
       // this.messages = m.messages;
       const m = await messageService.getAll();
-      this.messages = m.filter((o) => o.roomId === this.$route.params.id);
+      this.messages = m.filter((o) => o.roomId === parseInt(this.$route.params.id));
     },
   },
 };

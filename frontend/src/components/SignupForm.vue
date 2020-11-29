@@ -1,6 +1,6 @@
 <template>
-  <h3>signup</h3>
   <div>
+    <h3>signup</h3>
     <form @submit.prevent="handleSignup">
       <div>
         <label for="username">username</label>

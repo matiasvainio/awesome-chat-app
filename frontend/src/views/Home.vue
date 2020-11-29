@@ -1,12 +1,9 @@
 <template>
   <div class="home">
     <h1>home</h1>
-    <div class="chat-links">
-      <router-link to="/chat/1">
-        <h3>chat 1</h3>
-      </router-link>
-      <router-link to="/chat/2">
-        <h3>chat 2</h3>
+    <div class="room-links" v-for="room in rooms" :key="room.id">
+      <router-link :to="`/chat/${room.roomId}`">
+        <h3>{{ room.roomName }}</h3>
       </router-link>
     </div>
   </div>
@@ -17,11 +14,18 @@ import messageService from '@/services/messages';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      rooms: [],
+    };
+  },
   mounted() {
     this.foo();
   },
   methods: {
-    async foo() {},
+    async foo() {
+      this.rooms = await messageService.getRooms();
+    },
   },
 };
 </script>

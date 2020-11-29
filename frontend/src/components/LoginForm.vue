@@ -28,21 +28,26 @@ export default {
     };
   },
   mounted() {
-    this.getUsers();
+    // this.getUsers();
   },
   methods: {
     async getUsers() {
       this.users = await userService.getAll();
     },
     async handleLogin() {
-      const username = this.username;
-      const password = this.password;
+      // const username = this.username;
+      // const password = this.password;
 
-      const foundUser = this.users.find((o) => o.username === username);
+      // const foundUser = this.users.find((o) => o.username === username);
 
-      if (foundUser) {
-        await authService.login({ username, password });
+      // if (foundUser) {
+      //   await authService.login({ username, password });
+      //   this.$router.push('/home');
+      // }
+      const user = await authService.login({ username: this.username, password: this.password });
+      if (user.status === 200) {
         this.$router.push('/home');
+        window.localStorage.setItem('loggedChatAppUser', user.data);
       }
     },
   },
