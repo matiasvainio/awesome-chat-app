@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/message.js');
+const cors = require('cors');
+
+router.use(cors());
 
 /* GET ALL MESSAGES */
 router.get('/', async (req, res, next) => {

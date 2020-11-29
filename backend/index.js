@@ -4,12 +4,10 @@ const cors = require('cors');
 const message = require('./routes/message.js');
 const room = require('./routes/room.js');
 const user = require('./routes/user.js');
+const Message = require('./models/message');
 
 const app = express();
 app.use(cors());
-app.use('/message', message);
-app.use('/room', room);
-app.use('/user', user);
 
 const uri =
   'mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority';
@@ -23,6 +21,12 @@ connection.once('open', () => {
 });
 
 const port = 3000;
+
+app.get('/', async (req, res) => {
+  const messages = await Message.find({});
+
+  res.json(messages.map((message) => message));
+});
 
 app.listen(port, () => {
   console.log(`app listenting at http://localhost:${port}`);
