@@ -11,15 +11,16 @@ const room = require('./routes/room');
 const message = require('./routes/message');
 const user = require('./routes/user');
 
+const loginRouter = require('./routes/login');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: 'false' }));
 app.use('/rooms', express.static(path.join(__dirname, 'dist')));
-//app.use('/api/room', room);
-//app.use('/api/user', user);
+app.use('/api/rooms', room);
+app.use('/api/users', user);
 app.use('/api/messages', message);
-
-// app.use(cors());
+app.use('/api/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -172,5 +173,7 @@ app.post('/signup', async (req, res) => {
     })
     .catch((error) => console.error(error));
 });
+
+app.use(cors());
 
 module.exports = app;
