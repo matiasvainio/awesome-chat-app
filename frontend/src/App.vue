@@ -60,6 +60,7 @@ export default {
 
 #app button:hover {
   background-color: #5e81ac;
+  cursor: pointer;
 }
 
 #app {
@@ -69,7 +70,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   display: grid;
-  grid-template-columns: 20vh 1fr 20vh;
+  grid-template-columns: 5vh 1fr 5vh;
 }
 
 #nav {
@@ -77,6 +78,8 @@ export default {
   background-color: #4c566a;
   color: #eceff4;
   grid-column: 1/4;
+  position: sticky;
+  top: 0;
 }
 
 #nav a {
@@ -91,5 +94,9 @@ export default {
 .nav-links {
   display: flex;
   justify-content: space-evenly;
+}
+
+input {
+  padding: 10px 12px;
 }
 </style>

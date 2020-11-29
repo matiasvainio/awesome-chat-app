@@ -1,10 +1,10 @@
 <template>
   <div class="landing">
     <h1>Awesome Chat App</h1>
-    <button id="login" @click="handleShow">login</button>
-    <button id="signup" @click="handleShow">signup</button>
     <LoginForm v-if="login" />
     <SignupForm v-if="signup" />
+    <button id="login" @click="handleShow">login</button>
+    <button id="signup" @click="handleShow">signup</button>
   </div>
 </template>
 
@@ -35,5 +35,7 @@ export default {
 <style scoped>
 .landing {
   grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,14 +1,18 @@
 <template>
-  <h3>signup</h3>
   <div>
+    <h3>signup</h3>
     <form @submit.prevent="handleSignup">
       <div>
         <label for="username">username</label>
-        <input v-model="username" type="text" />
+        <div>
+          <input v-model="username" type="text" />
+        </div>
       </div>
       <div>
         <label for="password">password</label>
-        <input v-model="password" type="password" />
+        <div>
+          <input v-model="password" type="password" />
+        </div>
       </div>
       <button>login</button>
     </form>

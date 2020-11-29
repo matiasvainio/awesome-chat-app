@@ -1,13 +1,17 @@
 <template>
-  <div>
+  <div class="login-container">
     <form @submit.prevent="handleLogin">
       <div>
         <label for="username">username</label>
-        <input v-model="username" type="text" />
+        <div>
+          <input v-model="username" type="text" />
+        </div>
       </div>
       <div>
         <label for="password">password</label>
-        <input v-model="password" type="password" />
+        <div>
+          <input v-model="password" type="password" />
+        </div>
       </div>
       <button>login</button>
     </form>
@@ -49,4 +53,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+</style>

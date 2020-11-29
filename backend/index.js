@@ -5,6 +5,8 @@ const cors = require('cors');
 const app = express();
 const router = express.Router();
 
+const bar = require('/models/foo');
+
 app.use(cors());
 
 const uri =
@@ -22,7 +24,7 @@ connection.once('open', () => {
   console.log('mongodb connection established');
 });
 
-const port = 3000;
+const port = 3001;
 
 const schema = new mongoose.Schema({
   content: String,

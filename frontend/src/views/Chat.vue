@@ -1,7 +1,10 @@
 <template>
   <div class="chat">
     <ChatMessages class="chat-messages" :messages="messages" />
-    <MessageForm @add-message="addMessage" />
+    <div class="bottom"></div>
+    <div class="form-container">
+      <MessageForm @add-message="addMessage" />
+    </div>
   </div>
 </template>
 
@@ -22,8 +25,10 @@ export default {
       messages: [],
     };
   },
+  window() {},
   mounted() {
     this.getMessages();
+    this.scrollDown();
   },
   methods: {
     addMessage(message) {
@@ -37,6 +42,14 @@ export default {
       const m = await messageService.getAll();
       this.messages = m.filter((o) => o.roomId === this.$route.params.id);
     },
+    scrollDown() {
+      const el = this.$el.querySelector('bottom');
+      console.log(el);
+
+      if (el) {
+        el.scrollIntoView(false);
+      }
+    },
   },
 };
 </script>
@@ -44,5 +57,10 @@ export default {
 <style scoped>
 .chat {
   grid-column: 2/3;
+}
+
+.form-container {
+  /* position: sticky;
+  bottom: 0; */
 }
 </style>

@@ -38,14 +38,16 @@ export default {
 <style scoped>
 .message {
   margin: 0.2em;
-  border: 2px black solid;
+  background-color: #4c566a;
+  color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: left;
 }
 .message-notuser {
   margin: 0.2em;
-  border: 2px black solid;
+  background-color: #5e81ac;
+  color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: right;
