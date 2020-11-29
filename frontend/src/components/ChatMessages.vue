@@ -2,7 +2,7 @@
   <div class="chat-messages">
     <ul>
       <li v-for="message in messages" :key="message.id">
-        <Message :message="message" />
+        <Message :message="message" @remove-message="removeMessage" />
       </li>
     </ul>
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 import Message from '@/components/Message';
+import messageService from '@/services/messages';
 
 export default {
   name: 'ChatMessages',
@@ -17,6 +18,11 @@ export default {
     Message,
   },
   props: ['messages'],
+  methods: {
+    removeMessage(id) {
+      this.$emit('remove-message', id);
+    },
+  },
 };
 </script>
 

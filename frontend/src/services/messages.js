@@ -18,4 +18,9 @@ const create = async (object) => {
   return response.data;
 };
 
-export default { getAll, create, getRooms };
+const remove = async (id) => {
+  const response = await axios.delete(`${messageUrl}/${id}`);
+  return response.data;
+};
+
+export default { getAll, create, getRooms, remove };

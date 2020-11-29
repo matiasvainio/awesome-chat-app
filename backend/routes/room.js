@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Room = require('../models/room.js');
+const cors = require('cors');
+
+router.use(cors());
 
 /* GET ALL ROOMS */
 router.get('/', function (req, res, next) {

@@ -24,7 +24,7 @@ export default {
   methods: {
     handleForm() {
       const newMessage = {
-        id: utils.getId(),
+        id: String,
         roomId: this.$route.params.id,
         content: this.formContent,
         date: new Date(),
