@@ -4,7 +4,7 @@
       <h1>Awesome Chat App</h1>
     </div>
     <div class="nav-links">
-      <router-link to="/">
+      <router-link v-if="isLogged" to="/">
         Login
       </router-link>
       <router-link to="/about">
@@ -18,9 +18,15 @@
 
 <script>
 import authService from '@/services/auth';
+import utils from './utils/utils';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      isNotLogged: false,
+    };
+  },
   mounted() {
     this.checkIfLoggedIn();
   },
