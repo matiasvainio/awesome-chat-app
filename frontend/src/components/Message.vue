@@ -1,5 +1,5 @@
 <template>
-  <div :class="isUser ? 'message' : 'message-notuser'">
+  <div class="message" :class="isUser ? 'message-user' : 'message-notuser'">
     <div>
       {{ message.content }}
     </div>
@@ -9,7 +9,7 @@
     <div class="date">
       {{ message.date }}
     </div>
-    <button v-if="isUser" @click="removeMessage">x</button>
+    <button class="menu-button" v-if="isUser" @click="removeMessage">x</button>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     alignMessages() {
+      console.log(this.message.date);
       const user =
         utils.getUser().data.username === this.message.user
           ? (this.isUser = true)
@@ -42,14 +43,17 @@ export default {
 };
 </script>
 
-<style scoped>
-.message {
+<style>
+.message-user {
   margin: 0.2em;
   background-color: #4c566a;
   color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .message-notuser {
   margin: 0.2em;
@@ -64,5 +68,10 @@ export default {
 }
 .date {
   font-size: 0.5em;
+}
+
+.menu-button {
+  padding: 5px 7px;
+  background-color: red;
 }
 </style>

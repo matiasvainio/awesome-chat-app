@@ -53,7 +53,7 @@ export default {
   box-sizing: border-box;
 }
 
-#app button {
+button {
   border: none;
   color: white;
   background-color: #4c566a;
@@ -64,7 +64,7 @@ export default {
   text-decoration: none;
 }
 
-#app button:hover {
+button:hover {
   background-color: #5e81ac;
   cursor: pointer;
 }

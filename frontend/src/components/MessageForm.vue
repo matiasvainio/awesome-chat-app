@@ -1,7 +1,7 @@
 <template>
   <div class="message-form" v-if="user">
     <form @submit.prevent="handleForm" autocomplete="off">
-      <input v-model="formContent" name="content" type="text" />
+      <input v-model="formContent" name="content" type="text" placeholder="Message.." />
       <button>Send</button>
     </form>
   </div>
@@ -20,6 +20,7 @@ export default {
       },
       formContent: '',
       user: utils.getUser(),
+      date: new Date(),
     };
   },
   methods: {
@@ -28,12 +29,15 @@ export default {
         id: String,
         roomId: this.$route.params.id,
         content: this.formContent,
-        date: new Date(),
+        date: this.createDateString(),
         user: utils.getUser().data.username,
       };
 
       this.$emit('add-message', newMessage);
       this.formContent = '';
+    },
+    createDateString() {
+      return this.date.getHours() + ':' + this.date.getMinutes();
     },
   },
 };
@@ -45,6 +49,7 @@ export default {
 }
 
 .message-form input {
-  color: pink;
+  width: 80%;
+  border: none;
 }
 </style>
