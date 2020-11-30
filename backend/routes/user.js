@@ -1,47 +1,31 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user.js');
+const bcrypt = require('bcrypt');
+const usersRouter = require('express').Router();
+const User = require('../models/user');
+const cors = require('cors');
+const { validateUser } = require('../validators/userValidator');
+usersRouter.use(cors());
 
 usersRouter.get('/', async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
 
-usersRouter.post('/', async (req, res) => {
+usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
   console.log(body);
 
-/* GET SINGLE USER BY ID */
-router.get('/:id', function (req, res, next) {
-  User.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  const saltRounds = 10;
+  const passwordHash = await bcrypt.hash(body.password, saltRounds);
+
+  const user = new User({
+    username: body.username,
+    passwordHash,
   });
+
+  const savedUser = await user.save();
+
+  res.json(savedUser);
 });
 
-/* SAVE USER */
-router.post('/', function (req, res, next) {
-  User.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
-/* UPDATE USER */
-router.put('/:id', function (req, res, next) {
-  User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
-/* DELETE USER */
-router.delete('/:id', function (req, res, next) {
-  User.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
-module.exports = router;
+module.exports = usersRouter;

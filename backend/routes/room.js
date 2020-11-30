@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../models/room.js');
 
+const cors = require('cors');
+
+router.use(cors());
+
 /* GET ALL ROOMS */
 router.get('/', function (req, res, next) {
   Room.find(function (err, products) {
