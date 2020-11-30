@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const cors = require('cors');
+app.use(cors());
 
 const room = require('./routes/room');
 const message = require('./routes/message');
@@ -21,6 +22,11 @@ app.use('/api/rooms', room);
 app.use('/api/users', user);
 app.use('/api/messages', message);
 app.use('/api/login', loginRouter);
+
+// SOCKETIOBS
+const SocketSingleton = require('./SocketSingleton');
+const http = require('http').createServer(app);
+SocketSingleton.configuration(http);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -88,7 +94,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Listen to the App Engine-specified port, or 8080 otherwise
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
 
@@ -173,7 +179,5 @@ app.post('/signup', async (req, res) => {
     })
     .catch((error) => console.error(error));
 });
-
-app.use(cors());
 
 module.exports = app;

@@ -5,9 +5,18 @@ const cors = require('cors');
 
 router.use(cors());
 
+// SOCKETIOBS
+const SocketSingleton = require('../SocketSingleton');
+
 /* GET ALL MESSAGES */
 router.get('/', async (req, res, next) => {
   await Message.find(function (err, products) {
+    SocketSingleton.io.on('connection', (socket) => {
+      console.log('connected');
+      SocketSingleton.io.on('disconnect', (socket) => {
+        console.log(disconnected);
+      });
+    });
     if (err) return next(err);
     res.json(products);
   });
@@ -25,6 +34,9 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   await Message.create(req.body, function (err, post) {
     if (err) return next(err);
+    SocketSingleton.io.on('connection', (socket) => {
+      console.log('connected');
+    });
     res.json(post);
   });
 });
