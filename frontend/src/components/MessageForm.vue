@@ -1,6 +1,6 @@
 <template>
   <div class="message-form" v-if="user">
-    <form @submit.prevent="handleForm">
+    <form @submit.prevent="handleForm" autocomplete="off">
       <input v-model="formContent" name="content" type="text" />
       <button>Send</button>
     </form>
@@ -39,7 +39,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .message-form {
+  width: 100%;
+}
+
+.message-form input {
+  color: pink;
 }
 </style>
