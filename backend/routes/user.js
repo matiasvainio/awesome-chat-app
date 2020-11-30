@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
 
-/* GET ALL USER */
-router.get('/', function (req, res, next) {
-  User.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
+usersRouter.get('/', async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
 });
+
+usersRouter.post('/', async (req, res) => {
+  const { body } = req;
+
+  console.log(body);
 
 /* GET SINGLE USER BY ID */
 router.get('/:id', function (req, res, next) {

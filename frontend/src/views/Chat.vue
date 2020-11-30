@@ -47,6 +47,7 @@ export default {
 
 <style scoped>
 .chat {
+  margin-bottom: 7em;
 }
 
 .chat-messages {
@@ -56,7 +57,7 @@ export default {
 
 .message-form {
   background-color: #d8dee9;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   padding: 0.8em;
 }
