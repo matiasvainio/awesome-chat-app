@@ -11,6 +11,9 @@
       </div>
       <button>login</button>
     </form>
+    <div class="login-notification" v-if="showNotification">
+      <h3>Wrong username or password</h3>
+    </div>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
       users: [],
       username: '',
       password: '',
+      showNotification: false,
     };
   },
   mounted() {
@@ -45,10 +49,15 @@ export default {
       //   await authService.login({ username, password });
       //   this.$router.push('/home');
       // }
-      const user = await authService.login({ username: this.username, password: this.password });
-      if (user.status === 200) {
+      try {
+        const user = await authService.login({ username: this.username, password: this.password });
         this.$router.push('/home');
         utils.setUser(user);
+      } catch (exception) {
+        this.showNotification = !this.showNotification;
+        setTimeout(() => {
+          this.showNotification = !this.showNotification;
+        }, 2000);
       }
     },
   },

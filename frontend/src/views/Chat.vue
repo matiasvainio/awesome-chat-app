@@ -28,7 +28,6 @@ export default {
   methods: {
     async addMessage(message) {
       const newMessage = await messageService.create(message);
-      console.log('newmessage', newMessage);
       this.messages = [...this.messages, newMessage];
     },
     async getMessages() {
@@ -36,8 +35,8 @@ export default {
       this.messages = m.filter((o) => o.roomId === parseInt(this.$route.params.id));
     },
     async removeMessage(id) {
-      messageService.remove(id);
-      this.messages = this.getMessages();
+      await messageService.remove(id);
+      await this.getMessages();
     },
   },
 };

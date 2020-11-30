@@ -23,10 +23,10 @@ export default {
     };
   },
   mounted() {
-    this.foo();
+    this.getRooms();
   },
   methods: {
-    async foo() {
+    async getRooms() {
       this.rooms = await messageService.getRooms();
     },
   },

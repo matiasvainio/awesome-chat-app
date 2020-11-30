@@ -4,7 +4,7 @@
       <h1>Awesome Chat App</h1>
     </div>
     <div class="nav-links">
-      <router-link v-if="isLogged" to="/">
+      <router-link to="/">
         Login
       </router-link>
       <router-link to="/about">
@@ -24,7 +24,7 @@ export default {
   name: 'App',
   data() {
     return {
-      isNotLogged: false,
+      isNotLogged: true,
     };
   },
   mounted() {
