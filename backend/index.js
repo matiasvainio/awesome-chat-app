@@ -7,13 +7,6 @@ const user = require('./routes/user.js');
 const Message = require('./models/message');
 
 const app = express();
-<<<<<<< HEAD
-const router = express.Router();
-
-const bar = require('/models/foo');
-
-=======
->>>>>>> matias
 app.use(cors());
 
 const uri =
