@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-messages">
+  <div class="message-form">
     <form @submit.prevent="handleForm">
       <input v-model="formContent" name="content" type="text" />
       <button>Send</button>
@@ -38,4 +38,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.message-form {
+}
+</style>

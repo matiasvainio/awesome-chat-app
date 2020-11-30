@@ -38,8 +38,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  grid-row: 2;
-  grid-column: 2/3;
 }
 
 a h3 {

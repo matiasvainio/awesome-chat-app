@@ -43,7 +43,8 @@ export default {
 </script>
 
 <style scoped>
-.chat {
-  grid-column: 2/3;
+.chat-messages {
+  margin-left: 2em;
+  margin-right: 2em;
 }
 </style>

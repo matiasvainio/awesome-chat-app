@@ -32,8 +32,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.landing {
-  grid-column: 2/3;
-}
-</style>
+<style scoped></style>
