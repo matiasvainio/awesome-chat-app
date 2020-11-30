@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-messages">
+  <div class="message-form" v-if="user">
     <form @submit.prevent="handleForm">
       <input v-model="formContent" name="content" type="text" />
       <button>Send</button>
@@ -19,16 +19,17 @@ export default {
         content: '',
       },
       formContent: '',
+      user: utils.getUser(),
     };
   },
   methods: {
     handleForm() {
       const newMessage = {
-        id: utils.getId(),
+        id: String,
         roomId: this.$route.params.id,
         content: this.formContent,
         date: new Date(),
-        user: utils.getUser(),
+        user: utils.getUser().data.username,
       };
 
       this.$emit('add-message', newMessage);
@@ -38,4 +39,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.message-form {
+}
+</style>

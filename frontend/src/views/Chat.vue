@@ -1,10 +1,7 @@
 <template>
   <div class="chat">
-    <ChatMessages class="chat-messages" :messages="messages" />
-    <div class="bottom"></div>
-    <div class="form-container">
-      <MessageForm @add-message="addMessage" />
-    </div>
+    <ChatMessages class="chat-messages" :messages="messages" @remove-message="removeMessage" />
+    <MessageForm @add-message="addMessage" />
   </div>
 </template>
 
@@ -31,16 +28,17 @@ export default {
     this.scrollDown();
   },
   methods: {
-    addMessage(message) {
-      console.log(message);
-      this.messages = [...this.messages, message];
-      messageService.create(message);
+    async addMessage(message) {
+      const newMessage = await messageService.create(message);
+      this.messages = [...this.messages, newMessage];
     },
     async getMessages() {
-      // const m = await messageService.getRoomMessages(this.$route.params.id);
-      // this.messages = m.messages;
       const m = await messageService.getAll();
-      this.messages = m.filter((o) => o.roomId === this.$route.params.id);
+      this.messages = m.filter((o) => o.roomId === parseInt(this.$route.params.id));
+    },
+    async removeMessage(id) {
+      await messageService.remove(id);
+      await this.getMessages();
     },
     scrollDown() {
       const el = this.$el.querySelector('bottom');
@@ -55,8 +53,9 @@ export default {
 </script>
 
 <style scoped>
-.chat {
-  grid-column: 2/3;
+.chat-messages {
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 .form-container {

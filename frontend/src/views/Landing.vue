@@ -32,10 +32,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.landing {
-  grid-column: 2/3;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped></style>

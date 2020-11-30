@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3000/rooms';
-const messageUrl = 'http://localhost:3000/messages';
+const baseUrl = 'http://localhost:3000/api/rooms';
+const messageUrl = 'http://localhost:3000/api/messages';
 
 const getAll = async () => {
   const response = await axios.get(messageUrl);
   return response.data;
 };
 
-const getRoomMessages = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id}`);
+const getRooms = async () => {
+  const response = await axios.get(baseUrl);
   return response.data;
 };
 
@@ -18,4 +18,9 @@ const create = async (object) => {
   return response.data;
 };
 
-export default { getAll, create, getRoomMessages };
+const remove = async (id) => {
+  const response = await axios.delete(`${messageUrl}/${id}`);
+  return response.data;
+};
+
+export default { getAll, create, getRooms, remove };

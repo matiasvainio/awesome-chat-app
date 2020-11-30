@@ -1,20 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const message = require('./routes/message.js');
+const room = require('./routes/room.js');
+const user = require('./routes/user.js');
+const Message = require('./models/message');
 
 const app = express();
+<<<<<<< HEAD
 const router = express.Router();
 
 const bar = require('/models/foo');
 
+=======
+>>>>>>> matias
 app.use(cors());
 
 const uri =
-  'mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majorityy';
-// const client = new MongoClient(uri, {
-//   useUnifiedTopology: true,
-//   useNewUrlParser: true,
-// });
+  'mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority';
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -26,32 +29,10 @@ connection.once('open', () => {
 
 const port = 3001;
 
-const schema = new mongoose.Schema({
-  content: String,
-});
+app.get('/', async (req, res) => {
+  const messages = await Message.find({});
 
-schema.set('toJSON', {
-  transform: (doc, object) => {
-    const returnableObject = object;
-    // eslint-disable-next-line no-underscore-dangle
-    returnableObject.id = object._id.toString();
-    // eslint-disable-next-line no-underscore-dangle
-    delete returnableObject._id;
-    // eslint-disable-next-line no-underscore-dangle
-    delete returnableObject.__v;
-    return returnableObject;
-  },
-});
-
-const Message = mongoose.model('Message', schema);
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.get('/messages', async (req, res) => {
-  const foo = await Message.find({});
-  res.json(foo.map((o) => o.toJSON()));
+  res.json(messages.map((message) => message));
 });
 
 app.listen(port, () => {
