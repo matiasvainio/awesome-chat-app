@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav" v-if="$route.meta.header === none">
     <div>
       <h1>Awesome Chat App</h1>
     </div>

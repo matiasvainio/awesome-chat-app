@@ -1,10 +1,16 @@
 <template>
   <div class="landing">
     <h1>Awesome Chat App</h1>
-    <LoginForm v-if="login" />
-    <SignupForm v-if="signup" />
-    <button id="login" @click="handleShow">login</button>
-    <button id="signup" @click="handleShow">signup</button>
+    <div class="landing-forms">
+      <LoginForm v-if="login" />
+      <SignupForm v-if="signup" />
+    </div>
+    <div class="buttons">
+      <button id="login" @click="handleShow">login</button>
+      <div>
+        <button id="signup" @click="handleShow">signup</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,4 +38,29 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  margin-top: 3em;
+}
+
+.landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-image: url('../res/bg.jpg');
+  background-size: 850px auto;
+}
+
+button {
+  width: 12em;
+}
+
+.buttons {
+  width: 100%;
+}
+</style>

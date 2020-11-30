@@ -1,7 +1,9 @@
 <template>
   <div class="chat">
-    <ChatMessages class="chat-messages" :messages="messages" @remove-message="removeMessage" />
-    <MessageForm @add-message="addMessage" />
+    <div class="chat-messages">
+      <ChatMessages :messages="messages" @remove-message="removeMessage" />
+    </div>
+    <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
 
@@ -25,7 +27,6 @@ export default {
   window() {},
   mounted() {
     this.getMessages();
-    this.scrollDown();
   },
   methods: {
     async addMessage(message) {
@@ -40,26 +41,23 @@ export default {
       await messageService.remove(id);
       await this.getMessages();
     },
-    scrollDown() {
-      const el = this.$el.querySelector('bottom');
-      console.log(el);
-
-      if (el) {
-        el.scrollIntoView(false);
-      }
-    },
   },
 };
 </script>
 
 <style scoped>
+.chat {
+}
+
 .chat-messages {
   margin-left: 2em;
   margin-right: 2em;
 }
 
-.form-container {
-  /* position: sticky;
-  bottom: 0; */
+.message-form {
+  background-color: #d8dee9;
+  position: sticky;
+  bottom: 0;
+  padding: 0.8em;
 }
 </style>

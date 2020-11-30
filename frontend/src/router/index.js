@@ -8,6 +8,9 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+    meta: {
+      header: 'none',
+    },
   },
   {
     path: '/home',

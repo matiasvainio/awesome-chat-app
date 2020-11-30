@@ -1,11 +1,13 @@
 <template>
   <div class="home" v-if="user">
     <h1>home</h1>
-    <h3>{{ user }}</h3>
-    <div class="room-links" v-for="room in rooms" :key="room.id">
-      <router-link :to="`/chat/${room.roomId}`">
-        <h3>{{ room.roomName }}</h3>
-      </router-link>
+    <h3>Welcome {{ user }}</h3>
+    <div class="room-links">
+      <div v-for="room in rooms" :key="room.id">
+        <router-link :to="`/chat/${room.roomId}`">
+          <h3>{{ room.roomName }}</h3>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -45,8 +47,22 @@ export default {
   justify-content: center;
 }
 
+.room-links {
+  width: 12em;
+  margin-top: 5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 a h3 {
   margin: 10px;
-  background-color: pink;
+  border: none;
+  color: white;
+  background-color: #4c566a;
+  padding: 15px 30px;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
 }
 </style>
