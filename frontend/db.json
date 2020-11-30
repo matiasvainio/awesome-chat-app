@@ -74,6 +74,31 @@
       "content": "Testi 2",
       "date": "2020-11-26T11:22:29.320Z",
       "user": "Batman"
+    },
+    {
+      "id": 3484013,
+      "roomId": "1",
+      "content": "skiggel",
+      "date": "2020-11-27T11:09:44.778Z",
+      "user": "Batman"
+    },
+    {
+      "id": 2332782,
+      "roomId": "1",
+      "content": "adsfasdg",
+      "date": "2020-11-27T11:24:41.364Z",
+      "user": "Batman"
+    },
+    {
+      "id": 1656443,
+      "roomId": "1",
+      "content": "asfdgdsfg",
+      "date": "2020-11-27T11:24:42.877Z",
+      "user": "Batman"
+    },
+    {
+      "name": "foobar",
+      "id": 9895665
     }
   ],
   "users": [
@@ -108,6 +133,19 @@
       "username": "Batman",
       "password": "Salasana",
       "id": 3
+    },
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 4
+<<<<<<< HEAD
+    },
+    {
+      "username": "Batman",
+      "password": "",
+      "id": 5
+=======
+>>>>>>> matias
     }
   ]
 }

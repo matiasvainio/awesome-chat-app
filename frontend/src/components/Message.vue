@@ -9,16 +9,18 @@
     <div class="date">
       {{ message.date }}
     </div>
+    <button v-if="isUser" @click="removeMessage">x</button>
   </div>
 </template>
 
 <script>
 import utils from '@/utils/utils';
+import messageService from '@/services/messages';
 
 export default {
   name: 'Message',
   props: ['message'],
-  data: function() {
+  data() {
     return {
       isUser: false,
     };
@@ -28,8 +30,13 @@ export default {
   },
   methods: {
     alignMessages() {
-      const user = utils.getUser();
-      user === this.message.user ? (this.isUser = true) : (this.isUser = false);
+      const user =
+        utils.getUser().data.username === this.message.user
+          ? (this.isUser = true)
+          : (this.isUser = false);
+    },
+    removeMessage() {
+      this.$emit('remove-message', this.message.id);
     },
   },
 };
@@ -38,14 +45,16 @@ export default {
 <style scoped>
 .message {
   margin: 0.2em;
-  border: 2px black solid;
+  background-color: #4c566a;
+  color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: left;
 }
 .message-notuser {
   margin: 0.2em;
-  border: 2px black solid;
+  background-color: #5e81ac;
+  color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: right;

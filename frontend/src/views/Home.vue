@@ -1,12 +1,10 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="user">
     <h1>home</h1>
-    <div class="chat-links">
-      <router-link to="/chat/1">
-        <h3>chat 1</h3>
-      </router-link>
-      <router-link to="/chat/2">
-        <h3>chat 2</h3>
+    <h3>{{ user }}</h3>
+    <div class="room-links" v-for="room in rooms" :key="room.id">
+      <router-link :to="`/chat/${room.roomId}`">
+        <h3>{{ room.roomName }}</h3>
       </router-link>
     </div>
   </div>
@@ -14,14 +12,28 @@
 
 <script>
 import messageService from '@/services/messages';
+import utils from '../utils/utils';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      rooms: [],
+      user: '',
+    };
+  },
   mounted() {
-    this.foo();
+    this.getRooms();
+    this.getCurrentUser();
   },
   methods: {
-    async foo() {},
+    async getRooms() {
+      this.rooms = await messageService.getRooms();
+    },
+    getCurrentUser() {
+      const user = utils.getUser();
+      if (user) this.user = utils.getUser().data.username;
+    },
   },
 };
 </script>
@@ -31,8 +43,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  grid-row: 2;
-  grid-column: 2/3;
 }
 
 a h3 {

@@ -7,8 +7,8 @@
       <router-link to="/">
         Login
       </router-link>
-      <router-link to="/about">
-        About
+      <router-link to="/home">
+        Home
       </router-link>
       <a href="#" @click="logout">Logout</a>
     </div>
@@ -18,9 +18,15 @@
 
 <script>
 import authService from '@/services/auth';
+import utils from './utils/utils';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      isNotLogged: true,
+    };
+  },
   mounted() {
     this.checkIfLoggedIn();
   },
@@ -60,6 +66,7 @@ export default {
 
 #app button:hover {
   background-color: #5e81ac;
+  cursor: pointer;
 }
 
 #app {
@@ -68,8 +75,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  display: grid;
-  grid-template-columns: 20vh 1fr 20vh;
 }
 
 #nav {
@@ -77,6 +82,8 @@ export default {
   background-color: #4c566a;
   color: #eceff4;
   grid-column: 1/4;
+  position: sticky;
+  top: 0;
 }
 
 #nav a {
@@ -91,5 +98,9 @@ export default {
 .nav-links {
   display: flex;
   justify-content: space-evenly;
+}
+
+input {
+  padding: 10px 12px;
 }
 </style>
