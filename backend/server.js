@@ -14,19 +14,43 @@ const user = require('./routes/user');
 
 const loginRouter = require('./routes/login');
 
+// app.use(logger('dev'));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: 'false' }));
+// app.use('/rooms', express.static(path.join(__dirname, 'dist')));
+// app.use('/api/rooms', room);
+// app.use('/api/users', user);
+// app.use('/api/messages', message);
+// app.use('/api/login', loginRouter);
+
+// SOCKETIOBS
+// not working
+// const SocketSingleton = require('./SocketSingleton');
+const server = require('http').createServer(app);
+// SocketSingleton.configuration(server);
+
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:8080',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['my-custom-header'],
+    credentials: true,
+  },
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: 'false' }));
-app.use('/rooms', express.static(path.join(__dirname, 'dist')));
+// app.use('/rooms', express.static(path.join(__dirname, 'dist')));
 app.use('/api/rooms', room);
 app.use('/api/users', user);
 app.use('/api/messages', message);
 app.use('/api/login', loginRouter);
-
-// SOCKETIOBS
-const SocketSingleton = require('./SocketSingleton');
-const http = require('http').createServer(app);
-SocketSingleton.configuration(http);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -91,12 +115,6 @@ app.get('/signup', async (req, res) => {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Listen to the App Engine-specified port, or 8080 otherwise
-const PORT = process.env.PORT || 3000;
-http.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`);
-});
 
 //Creates new message with sender and content to message collection
 app.post('/submit', (req, res) => {
@@ -179,5 +197,12 @@ app.post('/signup', async (req, res) => {
     })
     .catch((error) => console.error(error));
 });
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
+});
+
+app.locals.io = io;
 
 module.exports = app;

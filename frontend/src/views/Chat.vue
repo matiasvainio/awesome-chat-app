@@ -27,7 +27,7 @@ export default {
     };
   },
   created() {
-    this.socket = io('http://localhost:3000/api/messages');
+    this.socket = io('http://localhost:3000');
   },
   mounted() {
     this.getMessages();
@@ -36,6 +36,7 @@ export default {
     async addMessage(message) {
       const newMessage = await messageService.create(message);
       this.messages = [...this.messages, newMessage];
+      this.socket.emit('message', newMessage);
     },
     async getMessages() {
       const m = await messageService.getAll();

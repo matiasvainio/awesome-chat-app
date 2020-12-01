@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     alignMessages() {
-      console.log(this.message.date);
       const user =
         utils.getUser().data.username === this.message.user
           ? (this.isUser = true)

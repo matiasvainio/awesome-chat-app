@@ -30,13 +30,10 @@ export default {
     };
   },
   created() {
-    this.socket = io('http://localhost:3000/api/messages');
+    // this.socket = io('http://localhost:3000/');
   },
   mounted() {
     this.checkIfLoggedIn();
-    this.socket.on('connection', (data) => {
-      console.log(data);
-    });
   },
   methods: {
     checkIfLoggedIn() {
@@ -48,11 +45,6 @@ export default {
     logout() {
       authService.logout();
       this.$router.push('/');
-    },
-    foo() {
-      this.socket.on('test', (data) => {
-        console.log(data);
-      });
     },
   },
 };
