@@ -31,12 +31,16 @@ export default {
   },
   mounted() {
     this.getMessages();
+    this.socket.on('change', (data) => {
+      this.getMessages();
+    });
   },
   methods: {
     async addMessage(message) {
+      console.log('message', message);
+
       const newMessage = await messageService.create(message);
-      this.messages = [...this.messages, newMessage];
-      this.socket.emit('message', newMessage);
+      this.messages = [...this.messages, message];
     },
     async getMessages() {
       const m = await messageService.getAll();
