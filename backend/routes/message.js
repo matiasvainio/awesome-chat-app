@@ -9,11 +9,11 @@ router.use(cors());
 
 /* GET ALL MESSAGES */
 router.get('/', async (req, res, next) => {
-  req.io.on('connection', (socket) => {
-    console.log('foobar');
-  });
   await Message.find(function (err, products) {
     if (err) return next(err);
+    // req.io.on('connection', (socket) => {
+    //   req.io.emit('messages', products);
+    // });
     res.json(products);
   });
 });
@@ -28,9 +28,6 @@ router.get('/:id', async (req, res, next) => {
 
 /* SAVE MESSAGE */
 router.post('/', async (req, res, next) => {
-  req.io.on('connection', (data) => {
-    console.log('post');
-  });
   await Message.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

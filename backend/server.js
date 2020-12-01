@@ -14,6 +14,8 @@ const user = require('./routes/user');
 
 const loginRouter = require('./routes/login');
 
+const Message = require('./models/message');
+
 // app.use(logger('dev'));
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: 'false' }));
@@ -36,6 +38,15 @@ const io = require('socket.io')(server, {
     allowedHeaders: ['my-custom-header'],
     credentials: true,
   },
+});
+
+const changeStream = Message.watch();
+
+changeStream.on('change', (change) => {
+  console.log(change);
+
+  console.log('change');
+  io.emit('change', change.fullDocument);
 });
 
 app.use((req, res, next) => {
