@@ -3,7 +3,7 @@
     <div class="chat-messages">
       <ChatMessages :messages="messages" @remove-message="removeMessage" />
     </div>
-    <MessageForm class="message-form" @add-message="addMessage" />
+      <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
 

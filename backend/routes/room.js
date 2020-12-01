@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Room = require('../models/room.js');
+const express = require('express');
+const router = express.Router();
+const Room = require('../models/room.js');
+
 const cors = require('cors');
 
 router.use(cors());

@@ -4,7 +4,7 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text" />
+          <input v-model="username" type="text"/>
         </div>
       </div>
       <div>

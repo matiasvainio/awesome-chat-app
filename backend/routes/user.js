@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const usersRouter = require('express').Router();
 const User = require('../models/user');
 const cors = require('cors');
+const { validateUser } = require('../validators/userValidator');
 usersRouter.use(cors());
 
 usersRouter.get('/', async (req, res) => {
@@ -9,7 +10,7 @@ usersRouter.get('/', async (req, res) => {
   res.json(users);
 });
 
-usersRouter.post('/', async (req, res) => {
+usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
   console.log(body);
