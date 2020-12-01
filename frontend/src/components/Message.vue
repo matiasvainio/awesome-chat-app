@@ -1,15 +1,17 @@
 <template>
-  <div class="message" :class="isUser ? 'message-user' : 'message-notuser'">
-    <div>
-      {{ message.content }}
+  <div class="message-container" @click="showMenuButton">
+    <div :class="isUser ? 'message-user' : 'message-notuser'">
+      <div>
+        {{ message.content }}
+      </div>
+      <div class="user">
+        {{ message.user }}
+      </div>
+      <div class="date">
+        {{ message.date }}
+      </div>
+      <button class="menu-button" v-if="isUser & showMenu" @click="removeMessage">Remove</button>
     </div>
-    <div class="user">
-      {{ message.user }}
-    </div>
-    <div class="date">
-      {{ message.date }}
-    </div>
-    <button class="menu-button" v-if="isUser" @click="removeMessage">x</button>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ export default {
   data() {
     return {
       isUser: false,
+      showMenu: false,
     };
   },
   mounted() {
@@ -30,7 +33,6 @@ export default {
   },
   methods: {
     alignMessages() {
-      console.log(this.message.date);
       const user =
         utils.getUser().data.username === this.message.user
           ? (this.isUser = true)
@@ -38,6 +40,9 @@ export default {
     },
     removeMessage() {
       this.$emit('remove-message', this.message.id);
+    },
+    showMenuButton() {
+      this.showMenu = !this.showMenu;
     },
   },
 };
@@ -52,9 +57,13 @@ export default {
   padding: 10px 15px;
   text-align: left;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
 }
+
+.message-user:hover {
+  background-color: #88c0d0;
+}
+
 .message-notuser {
   margin: 0.2em;
   background-color: #5e81ac;
@@ -62,6 +71,8 @@ export default {
   border-radius: 10px;
   padding: 10px 15px;
   text-align: right;
+  display: flex;
+  flex-direction: column;
 }
 .user {
   font-size: 0.8em;
@@ -72,6 +83,6 @@ export default {
 
 .menu-button {
   padding: 5px 7px;
-  background-color: red;
+  background-color: #bf616a;
 }
 </style>

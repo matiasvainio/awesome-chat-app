@@ -12,6 +12,7 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
+import io from 'socket.io-client';
 
 export default {
   name: 'Chat',
@@ -22,9 +23,12 @@ export default {
   data() {
     return {
       messages: [],
+      socket: {},
     };
   },
-  window() {},
+  created() {
+    this.socket = io('http://localhost:3000');
+  },
   mounted() {
     this.getMessages();
   },
@@ -32,6 +36,7 @@ export default {
     async addMessage(message) {
       const newMessage = await messageService.create(message);
       this.messages = [...this.messages, newMessage];
+      this.socket.emit('message', newMessage);
     },
     async getMessages() {
       const m = await messageService.getAll();

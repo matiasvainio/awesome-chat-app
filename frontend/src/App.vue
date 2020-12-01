@@ -19,13 +19,18 @@
 <script>
 import authService from '@/services/auth';
 import utils from './utils/utils';
+import io from 'socket.io-client';
 
 export default {
   name: 'App',
   data() {
     return {
       isNotLogged: true,
+      socket: {},
     };
+  },
+  created() {
+    // this.socket = io('http://localhost:3000/');
   },
   mounted() {
     this.checkIfLoggedIn();
