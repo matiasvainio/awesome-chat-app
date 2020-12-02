@@ -37,7 +37,12 @@ const remove = async (id) => {
 };
 
 const modify = async (message) => {
-  const response = await axios.put(`${messageUrl}/${message.id}`, { headers: authHeader() });
+  const response = await axios.put(`${messageUrl}/${message.id}`, message, {
+    headers: authHeader(),
+  });
+
+  console.log(response);
+
   return response.data;
 };
 

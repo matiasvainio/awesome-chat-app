@@ -17,6 +17,8 @@ const getTokenFrom = (req) => {
 
 /* GET ALL MESSAGES */
 router.get('/', async (req, res, next) => {
+  console.log(req);
+
   const token = getTokenFrom(req);
   if (!token) {
     res.sendStatus(401);
@@ -72,14 +74,18 @@ router.put('/:id', async (req, res, next) => {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
 
-  await Message.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    function (err, post) {
-      if (err) return next(err);
-      res.json(post);
-    }
-  );
+  const { body } = req;
+
+  console.log(body);
+
+  try {
+    const returned = await Message.findByIdAndUpdate(req.params.id, body, {
+      new: true,
+    });
+    res.json(returned.toJSON());
+  } catch (exception) {
+    response.sendStatus(404);
+  }
 });
 
 /* DELETE MESSAGE */

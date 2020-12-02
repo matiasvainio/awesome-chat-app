@@ -3,7 +3,7 @@
     <!-- <div class="icon"></div> -->
     <div :class="isUser ? 'message-user' : 'message-notuser'" @click="showMenuButton">
       <form class="modify-form" @submit.prevent="handleModify">
-        <input type="text" v-if="showInput" ref="modInput" />
+        <input type="text" v-if="showInput" ref="modInput" v-bind:value="placeholder" />
       </form>
       <div v-if="!showInput">
         {{ message.content }}
@@ -18,7 +18,7 @@
         Remove
       </button>
       <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
-        Modify
+        {{ mod }}
       </button>
     </div>
   </div>
@@ -36,10 +36,16 @@ export default {
       isUser: false,
       showMenu: false,
       showInput: false,
+      mod: 'Modify',
     };
   },
   mounted() {
     this.alignMessages();
+  },
+  computed: {
+    placeholder() {
+      return this.message.content;
+    },
   },
   methods: {
     alignMessages() {
@@ -53,11 +59,13 @@ export default {
     },
     showMod() {
       this.showInput = !this.showInput;
+      this.mod = 'Close';
     },
     handleModify() {
       const newMessage = this.message;
       newMessage.content = this.$refs.modInput.value;
-      this.$emit('modify-message', this.message);
+      this.$emit('modify-message', newMessage);
+
       this.showInput = !this.showInput;
       this.showMenu = !this.showMenu;
     },
@@ -83,7 +91,7 @@ export default {
 }
 
 .message-container-notuser {
-  width: 50%;
+  width: 90%;
   margin: auto;
   display: flex;
   justify-content: flex-start;
@@ -91,7 +99,7 @@ export default {
 }
 
 .message-container-user {
-  width: 50%;
+  width: 90%;
   margin: auto;
   display: flex;
   justify-content: flex-end;
@@ -136,6 +144,7 @@ export default {
 }
 
 .modify-form input {
+  width: auto;
   border: none;
   height: 2em;
 }
