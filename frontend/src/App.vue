@@ -65,6 +65,16 @@ export default {
   box-sizing: border-box;
 }
 
+.parent-div {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+body {
+  background-color: #eceff4;
+}
+
 button {
   border: none;
   color: white;

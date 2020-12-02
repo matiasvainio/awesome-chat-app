@@ -45,6 +45,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url('../res/bg.jpg');
+  background-size: cover;
+  height: 100%;
 }
 
 .room-links {

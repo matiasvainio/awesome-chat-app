@@ -6,18 +6,12 @@
       <SignupForm v-if="signup" />
     </div>
     <div class="buttons">
-      <button
-        id="login"
-        @click="handleShow"
-      >
+      <button id="login" @click="handleShow">
         login
       </button>
       <div>
-        <button
-          id="signup"
-          @click="handleShow"
-        >
-          signup
+        <button id="signup" @click="handleShow">
+          sign up
         </button>
       </div>
     </div>
@@ -63,7 +57,7 @@ h1 {
   flex-direction: column;
   justify-content: space-evenly;
   background-image: url('../res/bg.jpg');
-  background-size: 850px auto;
+  background-size: cover;
 }
 
 button {
