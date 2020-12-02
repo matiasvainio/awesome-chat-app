@@ -4,7 +4,7 @@
     @click="showMenuButton"
   >
     <div class="container">
-      <div class="icon"></div>
+      <!-- <div class="icon"></div> -->
       <div :class="isUser ? 'message-user' : 'message-notuser'">
         <div>
           {{ message.content }}
