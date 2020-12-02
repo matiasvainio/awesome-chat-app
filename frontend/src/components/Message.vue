@@ -1,16 +1,24 @@
 <template>
-  <div class="message-container" @click="showMenuButton">
-    <div :class="isUser ? 'message-user' : 'message-notuser'">
-      <div>
-        {{ message.content }}
+  <div
+    :class="isUser ? 'message-container-user' : 'message-container-notuser'"
+    @click="showMenuButton"
+  >
+    <div class="container">
+      <div class="icon"></div>
+      <div :class="isUser ? 'message-user' : 'message-notuser'">
+        <div>
+          {{ message.content }}
+        </div>
+        <div class="user">
+          {{ message.user }}
+        </div>
+        <div class="date">
+          {{ message.date }}
+        </div>
+        <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
+          Remove
+        </button>
       </div>
-      <div class="user">
-        {{ message.user }}
-      </div>
-      <div class="date">
-        {{ message.date }}
-      </div>
-      <button class="menu-button" v-if="isUser & showMenu" @click="removeMessage">Remove</button>
     </div>
   </div>
 </template>
@@ -60,8 +68,24 @@ export default {
   flex-direction: column;
 }
 
+.message-container-notuser {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.message-container-user {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .message-user:hover {
   background-color: #88c0d0;
+  cursor: pointer;
 }
 
 .message-notuser {
@@ -70,7 +94,7 @@ export default {
   color: #eceff4;
   border-radius: 10px;
   padding: 10px 15px;
-  text-align: right;
+  text-align: left;
   display: flex;
   flex-direction: column;
 }
@@ -79,6 +103,17 @@ export default {
 }
 .date {
   font-size: 0.5em;
+}
+
+.container {
+  display: flex;
+}
+
+.icon {
+  background-color: #bf616a;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
 }
 
 .menu-button {

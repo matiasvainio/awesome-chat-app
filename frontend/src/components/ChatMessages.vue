@@ -1,14 +1,25 @@
 <template>
   <div class="chat-messages">
-    <div class="message-list" ref="messageList">
-      <button @click="scrollDown">x</button>
+    <div
+      ref="messageList"
+      class="message-list"
+    >
+      <button @click="scrollDown">
+        x
+      </button>
       <ul>
-        <li v-for="message in messages" :key="message.id">
-          <Message :message="message" @remove-message="removeMessage" />
+        <li
+          v-for="message in messages"
+          :key="message.id"
+        >
+          <Message
+            :message="message"
+            @remove-message="removeMessage"
+          />
         </li>
       </ul>
     </div>
-    <div ref="bottom"></div>
+    <div ref="bottom" />
   </div>
 </template>
 

@@ -1,19 +1,22 @@
 <template>
-  <div id="nav" v-if="$route.meta.header === none">
-    <div>
-      <h1>Awesome Chat App</h1>
+  <div class="parent-div">
+    <div v-if="$route.meta.header === none" id="nav">
+      <div>
+        <h1>Awesome Chat App</h1>
+      </div>
+      <div class="nav-links">
+        <router-link to="/">
+          Login
+        </router-link>
+        <router-link to="/home">
+          Home
+        </router-link>
+        <a href="#" @click="logout">Logout</a>
+        <a href="#" v-if="!this.$route.name" @click="showMenu">Menu</a>
+      </div>
     </div>
-    <div class="nav-links">
-      <router-link to="/">
-        Login
-      </router-link>
-      <router-link to="/home">
-        Home
-      </router-link>
-      <a href="#" @click="logout">Logout</a>
-    </div>
+    <router-view :menuVisible="menuVisible" />
   </div>
-  <router-view />
 </template>
 
 <script>
@@ -27,6 +30,7 @@ export default {
     return {
       isNotLogged: true,
       socket: {},
+      menuVisible: false,
     };
   },
   created() {
@@ -45,6 +49,9 @@ export default {
     logout() {
       authService.logout();
       this.$router.push('/');
+    },
+    showMenu() {
+      this.menuVisible = !this.menuVisible;
     },
   },
 };

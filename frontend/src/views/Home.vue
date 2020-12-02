@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-if="user">
+  <div v-if="user" class="home">
     <h1>home</h1>
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">

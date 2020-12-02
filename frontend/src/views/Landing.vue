@@ -6,9 +6,19 @@
       <SignupForm v-if="signup" />
     </div>
     <div class="buttons">
-      <button id="login" @click="handleShow">login</button>
+      <button
+        id="login"
+        @click="handleShow"
+      >
+        login
+      </button>
       <div>
-        <button id="signup" @click="handleShow">signup</button>
+        <button
+          id="signup"
+          @click="handleShow"
+        >
+          signup
+        </button>
       </div>
     </div>
   </div>

@@ -4,18 +4,27 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text"/>
+          <input
+            v-model="username"
+            type="text"
+          >
         </div>
       </div>
       <div>
         <label for="password">password</label>
         <div>
-          <input v-model="password" type="password" />
+          <input
+            v-model="password"
+            type="password"
+          >
         </div>
       </div>
       <button>login</button>
     </form>
-    <div class="login-notification" v-if="showNotification">
+    <div
+      v-if="showNotification"
+      class="login-notification"
+    >
       <h3>Wrong username or password</h3>
     </div>
   </div>
