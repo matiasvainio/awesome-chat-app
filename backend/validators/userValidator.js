@@ -15,6 +15,7 @@ exports.validateUser = [
     .bail(),
   check('password')
     .trim()
+    .escape()
     .not()
     .isEmpty()
     .withMessage('Invalid password!')
