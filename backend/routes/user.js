@@ -2,8 +2,13 @@ const bcrypt = require('bcrypt');
 const usersRouter = require('express').Router();
 const User = require('../models/user');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 const { validateUser } = require('../validators/userValidator');
 usersRouter.use(cors());
+usersRouter.use(bodyParser.urlencoded({ extended: true }));
+usersRouter.use(bodyParser.json());
+usersRouter.use(mongoSanitize());
 
 usersRouter.get('/', async (req, res) => {
   const token = req.get('authorization');

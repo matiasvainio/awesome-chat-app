@@ -97,4 +97,14 @@ input:valid {
   color: black;
   background: none;
 }
+#passwordDiv {
+    display:flex;
+    flex-direction:row;
+    margin: 0;
+    justify-content: center;
+}
+#passwordDiv.input {
+    flex-grow:2;
+    border:none;
+}
 </style>

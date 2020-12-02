@@ -5,8 +5,10 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
 app.use(cors());
+app.use(mongoSanitize());
 
 const room = require('./routes/room');
 const message = require('./routes/message');
@@ -16,20 +18,7 @@ const loginRouter = require('./routes/login');
 
 const Message = require('./models/message');
 
-// app.use(logger('dev'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: 'false' }));
-// app.use('/rooms', express.static(path.join(__dirname, 'dist')));
-// app.use('/api/rooms', room);
-// app.use('/api/users', user);
-// app.use('/api/messages', message);
-// app.use('/api/login', loginRouter);
-
-// SOCKETIOBS
-// not working
-// const SocketSingleton = require('./SocketSingleton');
 const server = require('http').createServer(app);
-// SocketSingleton.configuration(server);
 
 const io = require('socket.io')(server, {
   cors: {
@@ -70,20 +59,6 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handler
-// app.use(function (err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
-
-//const uri = "mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority";
-//const client = new MongoClient(uri, { useNewUrlParser: true });
-
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -107,16 +82,6 @@ mongoose
   .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
 
-//client.connect(err => {})
-
-// app.get('/', (req, res) => {
-//   res.send('Hello from App Engine!');
-// });
-
-app.get('/submit', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/form.html'));
-});
-
 app.get('/login', async (req, res) => {
   res.sendFile(path.join(__dirname, '/views/login.html'));
 });
@@ -126,27 +91,6 @@ app.get('/signup', async (req, res) => {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//Creates new message with sender and content to message collection
-app.post('/submit', (req, res) => {
-  console.log({
-    name: req.body.name,
-    message: req.body.message,
-  });
-
-  //const collection = mongoose.model('Test', new Schema({ name: String }));
-  //const  message = {sender: req.body.name, content: req.body.message};
-
-  // perform actions on the collection object
-  //collection.insertOne(message);
-  console.log('1 document inserted');
-  res.redirect('/submit');
-
-  const messages = mongoose.model('Test', new Schema({ sender: String }));
-  messages.findOne(function (error, result) {
-    sender: Joni;
-  });
-});
 
 //Checks username and password. kinda
 app.post('/login', async (req, res) => {
