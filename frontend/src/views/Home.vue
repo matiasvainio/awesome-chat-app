@@ -65,4 +65,8 @@ a h3 {
   text-align: center;
   text-decoration: none;
 }
+
+a {
+  text-decoration: none;
+}
 </style>

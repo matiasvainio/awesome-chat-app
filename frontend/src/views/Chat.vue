@@ -46,8 +46,8 @@ export default {
       this.messages = [...this.messages, message];
     },
     async getMessages() {
-      const m = await messageService.getAll();
-      this.messages = m.filter((o) => o.roomId === parseInt(this.$route.params.id));
+      const m = await messageService.getAll(this.$route.params.id);
+      this.messages = m;
     },
     async removeMessage(id) {
       await messageService.remove(id);
