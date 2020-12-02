@@ -6,6 +6,12 @@ const { validateUser } = require('../validators/userValidator');
 usersRouter.use(cors());
 
 usersRouter.get('/', async (req, res) => {
+  const token = req.get('authorization');
+
+  if (!token) {
+    res.status(401).json({ error: 'not authorized' });
+  }
+
   const users = await User.find({});
   res.json(users);
 });
