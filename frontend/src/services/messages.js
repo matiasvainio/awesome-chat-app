@@ -12,13 +12,17 @@ const authHeader = () => {
   return {};
 };
 
-const getAll = async () => {
-  const response = await axios.get(messageUrl, { headers: authHeader() });
+const getAll = async (id) => {
+  const response = await axios.get(messageUrl, {
+    params: { id },
+    headers: authHeader(),
+  });
+
   return response.data;
 };
 
 const getRooms = async () => {
-  const response = await axios.get(baseUrl);
+  const response = await axios.get(baseUrl, { headers: authHeader() });
   return response.data;
 };
 

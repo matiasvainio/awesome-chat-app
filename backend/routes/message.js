@@ -26,7 +26,8 @@ router.get('/', async (req, res, next) => {
   if (!decodedToken.id) {
     res.status(401).json({ error: 'token missing or invalid' });
   }
-  await Message.find(function (err, products) {
+
+  await Message.find({ roomId: req.query.id }, function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
