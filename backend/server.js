@@ -5,10 +5,9 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const mongoSanitize = require('express-mongo-sanitize');
+
 const cors = require('cors');
 app.use(cors());
-app.use(mongoSanitize());
 
 const room = require('./routes/room');
 const message = require('./routes/message');
