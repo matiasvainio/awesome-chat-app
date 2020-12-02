@@ -1,24 +1,25 @@
 <template>
-  <div
-    :class="isUser ? 'message-container-user' : 'message-container-notuser'"
-    @click="showMenuButton"
-  >
-    <div class="container">
-      <!-- <div class="icon"></div> -->
-      <div :class="isUser ? 'message-user' : 'message-notuser'">
-        <div>
-          {{ message.content }}
-        </div>
-        <div class="user">
-          {{ message.user }}
-        </div>
-        <div class="date">
-          {{ message.date }}
-        </div>
-        <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
-          Remove
-        </button>
+  <div :class="isUser ? 'message-container-user' : 'message-container-notuser'">
+    <!-- <div class="icon"></div> -->
+    <div :class="isUser ? 'message-user' : 'message-notuser'" @click="showMenuButton">
+      <form class="modify-form" @submit.prevent="handleModify">
+        <input type="text" v-if="showInput" ref="modInput" />
+      </form>
+      <div v-if="!showInput">
+        {{ message.content }}
       </div>
+      <div class="user">
+        {{ message.user }}
+      </div>
+      <div class="date">
+        {{ message.date }}
+      </div>
+      <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
+        Remove
+      </button>
+      <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
+        Modify
+      </button>
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@ export default {
     return {
       isUser: false,
       showMenu: false,
+      showInput: false,
     };
   },
   mounted() {
@@ -49,14 +51,26 @@ export default {
     removeMessage() {
       this.$emit('remove-message', this.message.id);
     },
-    showMenuButton() {
+    showMod() {
+      this.showInput = !this.showInput;
+    },
+    handleModify() {
+      const newMessage = this.message;
+      newMessage.content = this.$refs.modInput.value;
+      this.$emit('modify-message', this.message);
+      this.showInput = !this.showInput;
       this.showMenu = !this.showMenu;
+    },
+    showMenuButton() {
+      if (!this.showInput) {
+        this.showMenu = !this.showMenu;
+      }
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .message-user {
   margin: 0.2em;
   background-color: #4c566a;
@@ -119,5 +133,10 @@ export default {
 .menu-button {
   padding: 5px 7px;
   background-color: #bf616a;
+}
+
+.modify-form input {
+  border: none;
+  height: 2em;
 }
 </style>

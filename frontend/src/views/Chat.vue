@@ -1,7 +1,11 @@
 <template>
   <div class="chat">
     <div class="chat-messages">
-      <ChatMessages :messages="messages" @remove-message="removeMessage" />
+      <ChatMessages
+        :messages="messages"
+        @remove-message="removeMessage"
+        @modify-message="modifyMessage"
+      />
     </div>
     <MessageForm class="message-form" @add-message="addMessage" />
   </div>
@@ -48,6 +52,9 @@ export default {
     async removeMessage(id) {
       await messageService.remove(id);
       await this.getMessages();
+    },
+    async modifyMessage(message) {
+      await messageService.modify(message);
     },
   },
 };

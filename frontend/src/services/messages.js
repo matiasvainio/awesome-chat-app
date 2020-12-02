@@ -28,8 +28,13 @@ const create = async (object) => {
 };
 
 const remove = async (id) => {
-  const response = await axios.delete(`${messageUrl}/${id}`);
+  const response = await axios.delete(`${messageUrl}/${id}`, { headers: authHeader() });
   return response.data;
 };
 
-export default { getAll, create, getRooms, remove };
+const modify = async (message) => {
+  const response = await axios.put(`${messageUrl}/${message.id}`, { headers: authHeader() });
+  return response.data;
+};
+
+export default { getAll, create, getRooms, remove, modify };
