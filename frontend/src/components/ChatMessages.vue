@@ -1,14 +1,20 @@
 <template>
   <div class="chat-messages">
-    <div class="message-list" ref="messageList">
-      <button @click="scrollDown">x</button>
+    <div ref="messageList" class="message-list">
+      <button @click="scrollDown">
+        x
+      </button>
       <ul>
         <li v-for="message in messages" :key="message.id">
-          <Message :message="message" @remove-message="removeMessage" />
+          <Message
+            :message="message"
+            @remove-message="removeMessage"
+            @modify-message="modifyMessage"
+          />
         </li>
       </ul>
     </div>
-    <div ref="bottom"></div>
+    <div ref="bottom" />
   </div>
 </template>
 
@@ -30,6 +36,9 @@ export default {
   methods: {
     removeMessage(id) {
       this.$emit('remove-message', id);
+    },
+    modifyMessage(message) {
+      this.$emit('modify-message', message);
     },
     scrollDown() {
       // console.log('scroll height', this.$refs.messageList.scrollHeight);

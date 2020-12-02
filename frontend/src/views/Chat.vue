@@ -1,9 +1,13 @@
 <template>
   <div class="chat">
     <div class="chat-messages">
-      <ChatMessages :messages="messages" @remove-message="removeMessage" />
+      <ChatMessages
+        :messages="messages"
+        @remove-message="removeMessage"
+        @modify-message="modifyMessage"
+      />
     </div>
-      <MessageForm class="message-form" @add-message="addMessage" />
+    <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
 
@@ -26,6 +30,7 @@ export default {
       socket: {},
     };
   },
+  props: ['menuVie'],
   created() {
     this.socket = io('http://localhost:3000');
   },
@@ -37,8 +42,6 @@ export default {
   },
   methods: {
     async addMessage(message) {
-      console.log('message', message);
-
       const newMessage = await messageService.create(message);
       this.messages = [...this.messages, message];
     },
@@ -50,18 +53,21 @@ export default {
       await messageService.remove(id);
       await this.getMessages();
     },
+    async modifyMessage(message) {
+      await messageService.modify(message);
+    },
   },
 };
 </script>
 
 <style scoped>
 .chat {
-  margin-bottom: 7em;
+  margin-bottom: 8em;
 }
 
 .chat-messages {
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .message-form {

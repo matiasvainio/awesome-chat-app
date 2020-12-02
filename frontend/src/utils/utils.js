@@ -5,7 +5,6 @@ const getUser = () => {
 };
 
 const setUser = (user) => {
-  console.log(user);
   window.localStorage.setItem('loggedChatAppUser', JSON.stringify(user));
 };
 

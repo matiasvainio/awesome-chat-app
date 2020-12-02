@@ -1,6 +1,6 @@
 <template>
-  <div class="message-form" v-if="user">
-    <form @submit.prevent="handleForm" autocomplete="off">
+  <div v-if="user" class="message-form">
+    <form autocomplete="off" @submit.prevent="handleForm">
       <input v-model="formContent" name="content" type="text" placeholder="Message.." />
       <button>Send</button>
     </form>
@@ -20,8 +20,11 @@ export default {
       },
       formContent: '',
       user: utils.getUser(),
-      date: new Date(),
+      date: '',
     };
+  },
+  updated() {
+    this.date = new Date();
   },
   methods: {
     handleForm() {
@@ -37,7 +40,13 @@ export default {
       this.formContent = '';
     },
     createDateString() {
-      return this.date.getHours() + ':' + this.date.getMinutes();
+      const minutes = this.date.getMinutes();
+      const hours = this.date.getHours();
+
+      if (minutes < 10) {
+        return hours + ':' + '0' + minutes;
+      }
+      return hours + ':' + minutes;
     },
   },
 };
