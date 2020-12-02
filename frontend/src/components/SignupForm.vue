@@ -79,25 +79,22 @@ export default {
 }
 input:valid {
   border: 2px solid green;
-<<<<<<< HEAD
-=======
 }
 #passwordDiv {
-  position:relative;
-  margin-bottom:10px;
+  position: relative;
+  margin-bottom: 10px;
   left: 13px;
 }
 #togglePass {
-  position:relative;
+  position: relative;
   right: 25px;
-  border:none;
-  border-radius:100%;
-  outline:none;
-  text-align:center;
-  padding:2px;
+  border: none;
+  border-radius: 100%;
+  outline: none;
+  text-align: center;
+  padding: 2px;
   font-size: 0.8em;
   color: black;
   background: none;
->>>>>>> 8d3df8e0c87fec8674222eafba55414abc6ce5f4
 }
 </style>
