@@ -58,8 +58,9 @@ export default {
       this.$emit('remove-message', this.message.id);
     },
     showMod() {
+      if (this.mod === 'Close') this.mod = 'Modify';
+      else this.mod = 'Close';
       this.showInput = !this.showInput;
-      this.mod = 'Close';
     },
     handleModify() {
       const newMessage = this.message;
