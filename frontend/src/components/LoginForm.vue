@@ -1,17 +1,25 @@
 <template>
   <div class="login-container">
+    <h3>login</h3>
     <form @submit.prevent="handleLogin">
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text" />
+          <input v-model="username" type="text" id="username"/>
         </div>
       </div>
-      <div>
-        <label for="password">password</label>
+      <label for="password">password</label>
+      <div id="passwordDiv">
         <div>
-          <input v-model="password" type="password" />
+          <input v-model="password" :type="passwordFieldType"/>
         </div>
+        <button
+              type="button"
+              @click="toggleVisibility"
+              id="togglePass"
+              :class="eyeClass"
+              aria-hidden="true"
+        ></button>
       </div>
       <button>login</button>
     </form>
@@ -33,6 +41,8 @@ export default {
       users: [],
       username: '',
       password: '',
+      passwordFieldType: 'password',
+      eyeClass: 'fa fa-eye',
       showNotification: false,
     };
   },
@@ -45,7 +55,8 @@ export default {
     },
     async handleLogin() {
       try {
-        const user = await authService.login({ username: this.username, password: this.password });
+        const usernameLowerCase = this.username.toLowerCase();
+        const user = await authService.login({ username: usernameLowerCase, password: this.password });
         this.$router.push('/home');
 
         console.log(user);
@@ -58,6 +69,10 @@ export default {
         }, 2000);
       }
     },
+    toggleVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+      this.eyeClass = this.eyeClass === 'fa fa-eye' ? 'fa fa-eye-slash' : 'fa fa-eye';
+    },
   },
 };
 </script>
@@ -67,5 +82,32 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+#passwordDiv {
+  position: relative;
+  margin-bottom: 10px;
+  left: 13px;
+}
+#togglePass {
+  position: relative;
+  right: 25px;
+  border: none;
+  border-radius: 100%;
+  outline: none;
+  text-align: center;
+  padding: 2px;
+  font-size: 0.8em;
+  color: black;
+  background: none;
+}
+#passwordDiv {
+    display:flex;
+    flex-direction:row;
+    margin: 0;
+    justify-content: center;
+}
+#passwordDiv.input {
+    flex-grow:2;
+    border:none;
 }
 </style>

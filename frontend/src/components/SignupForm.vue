@@ -32,7 +32,7 @@
               type="button"
               @click="toggleVisibility"
               id="togglePass"
-              class="fa fa-eye"
+              :class="eyeClass"
               aria-hidden="true"
             ></button>
           </div>
@@ -53,6 +53,7 @@ export default {
       username: '',
       password: '',
       passwordFieldType: 'password',
+      eyeClass: 'fa fa-eye'
     };
   },
   methods: {
@@ -68,6 +69,7 @@ export default {
     },
     toggleVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+      this.eyeClass = this.eyeClass === 'fa fa-eye' ? 'fa fa-eye-slash' : 'fa fa-eye';
     },
   },
 };
