@@ -29,7 +29,8 @@ router.get('/', async (req, res, next) => {
     res.sendStatus(401);
   }
 
-  const decodedToken = jwt.verify(token, 'SALAISUUS');
+  const decodedToken = jwt.verify(token, process.env.SECRET);
+  console.log(process.env.SECRET);
   if (!decodedToken.id) {
     res.status(401).json({ error: 'token missing or invalid' });
   }
@@ -44,7 +45,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
-  const decodedToken = jwt.verify(token, 'SALAISUUS');
+  const decodedToken = jwt.verify(token, process.env.SECRET);
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
@@ -59,7 +60,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const token = getTokenFrom(req);
 
-  const decodedToken = jwt.verify(token, 'SALAISUUS');
+  const decodedToken = jwt.verify(token, process.env.SECRET);
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
@@ -74,7 +75,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
-  const decodedToken = jwt.verify(token, 'SALAISUUS');
+  const decodedToken = jwt.verify(token, process.env.SECRET);
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
@@ -97,7 +98,7 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
-  const decodedToken = jwt.verify(token, 'SALAISUUS');
+  const decodedToken = jwt.verify(token, process.env.SECRET);
   if (!token || !decodedToken.id) {
     return res.status(401).json({ error: 'token missing or invalid' });
   }

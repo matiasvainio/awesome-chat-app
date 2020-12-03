@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
+require('dotenv').config();
 app.use(cors());
 app.use(mongoSanitize());
 
@@ -74,7 +75,7 @@ const options = {
 // mongoose.Promise = require('bluebird');
 mongoose
   .connect(
-    'mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority',
+    process.env.MONGODB_URI,
     { useNewUrlParser: true, useUnifiedTopology: true }
     // { promiseLibrary: require('bluebird') },
     // options

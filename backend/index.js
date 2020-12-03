@@ -6,8 +6,7 @@ const Message = require('./models/message');
 const app = express();
 app.use(cors());
 
-const uri =
-  'mongodb+srv://sudo:sudo123@chatapp.7etcu.mongodb.net/chatapp?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
