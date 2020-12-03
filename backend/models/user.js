@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   passwordHash: String,
+  room: Number,
 });
 
 userSchema.set('toJSON', {

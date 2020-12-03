@@ -9,8 +9,6 @@ loginRouter.use(cors());
 loginRouter.post('/', async (req, res) => {
   const { body } = req;
 
-  console.log(body);
-
   const user = await User.findOne({ username: body.username });
 
   const passwordCorrect =

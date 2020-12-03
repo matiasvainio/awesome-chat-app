@@ -24,8 +24,6 @@ usersRouter.get('/', async (req, res) => {
 usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
-  console.log(body);
-
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
@@ -37,6 +35,17 @@ usersRouter.post('/', validateUser, async (req, res) => {
   const savedUser = await user.save();
 
   res.json(savedUser);
+});
+
+usersRouter.put('/', async (req, res) => {
+  try {
+    const returned = await User.findByIdAndUpdate(req.params.id, body, {
+      new: true,
+    });
+    res.json(returned.toJSON());
+  } catch (exception) {
+    response.sendStatus(404);
+  }
 });
 
 module.exports = usersRouter;

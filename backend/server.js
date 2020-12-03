@@ -153,6 +153,12 @@ app.post('/signup', async (req, res) => {
     .catch((error) => console.error(error));
 });
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/public'));
+
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+}
+
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);

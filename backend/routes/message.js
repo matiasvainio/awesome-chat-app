@@ -22,15 +22,12 @@ const getTokenFrom = (req) => {
 
 /* GET ALL MESSAGES */
 router.get('/', async (req, res, next) => {
-  console.log(req);
-
   const token = getTokenFrom(req);
   if (!token) {
     res.sendStatus(401);
   }
 
   const decodedToken = jwt.verify(token, process.env.SECRET);
-  console.log(process.env.SECRET);
   if (!decodedToken.id) {
     res.status(401).json({ error: 'token missing or invalid' });
   }
@@ -81,8 +78,6 @@ router.put('/:id', async (req, res, next) => {
   }
 
   const { body } = req;
-
-  console.log(body);
 
   try {
     const returned = await Message.findByIdAndUpdate(req.params.id, body, {
