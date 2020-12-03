@@ -2,7 +2,7 @@
   <div class="parent-div">
     <div v-if="$route.meta.header === none" id="nav">
       <div>
-        <h1>Awesome Chat App</h1>
+        <h1>Awesome Chat App Beta</h1>
       </div>
       <div class="nav-links">
         <router-link to="/">
@@ -111,6 +111,7 @@ button:hover {
 #nav a {
   font-weight: bold;
   color: #eceff4;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {

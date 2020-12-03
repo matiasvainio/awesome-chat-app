@@ -24,11 +24,18 @@ usersRouter.get('/', async (req, res) => {
 usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
+<<<<<<< HEAD
+=======
+  console.log(body);
+
+  const usernameLowerCase = JSON.stringify(body.username).toLowerCase();
+
+>>>>>>> 78217333b6834fad19324e41b692712410722104
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
   const user = new User({
-    username: body.username,
+    username: JSON.parse(usernameLowerCase),
     passwordHash,
   });
 
