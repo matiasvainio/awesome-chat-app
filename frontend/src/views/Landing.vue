@@ -56,7 +56,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-image: url('../res/bg.jpg');
+  background-image: url('../res/bg2.jpg');
   background-size: cover;
 }
 

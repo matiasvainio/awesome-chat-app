@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3000/api/rooms';
-const messageUrl = 'http://localhost:3000/api/messages';
+const baseUrl = 'api/rooms';
+const messageUrl = 'api/messages';
 
 const authHeader = () => {
   const user = JSON.parse(window.localStorage.getItem('loggedChatAppUser'));
@@ -23,6 +23,11 @@ const getAll = async (id) => {
 
 const getRooms = async () => {
   const response = await axios.get(baseUrl, { headers: authHeader() });
+  return response.data;
+};
+
+const updateRoomUsers = async () => {
+  const response = await axios.put(baseUrl);
   return response.data;
 };
 

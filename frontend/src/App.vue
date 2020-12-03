@@ -103,8 +103,8 @@ button:hover {
   padding: 30px;
   background-color: #4c566a;
   color: #eceff4;
-  grid-column: 1/4;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
 }
 

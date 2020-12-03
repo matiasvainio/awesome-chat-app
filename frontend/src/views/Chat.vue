@@ -28,11 +28,12 @@ export default {
     return {
       messages: [],
       socket: {},
+      key: this.id,
     };
   },
-  props: ['menuVie'],
   created() {
     this.socket = io('http://localhost:3000');
+    console.log('params', this.$route.params);
   },
   mounted() {
     this.getMessages();

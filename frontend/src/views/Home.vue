@@ -4,7 +4,7 @@
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
       <div v-for="room in rooms" :key="room.id">
-        <router-link :to="`/chat/${room.roomId}`">
+        <router-link :to="{ path: `/chat/${room.roomId}`, params: { foo: room._id } }">
           <h3>{{ room.roomName }}</h3>
         </router-link>
       </div>
@@ -45,7 +45,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url('../res/bg.jpg');
+  background-image: url('../res/bg2.jpg');
   background-size: cover;
   height: 100%;
 }
@@ -55,6 +55,10 @@ export default {
   margin-top: 5em;
   margin-left: auto;
   margin-right: auto;
+}
+
+a h3:hover {
+  background-color: #5e81ac;
 }
 
 a h3 {
