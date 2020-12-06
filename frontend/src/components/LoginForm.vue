@@ -5,20 +5,20 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text" id="username"/>
+          <input v-model="username" type="text" id="username" />
         </div>
       </div>
       <label for="password">password</label>
       <div id="passwordDiv">
         <div>
-          <input v-model="password" :type="passwordFieldType"/>
+          <input v-model="password" :type="passwordFieldType" />
         </div>
         <button
-              type="button"
-              @click="toggleVisibility"
-              id="togglePass"
-              :class="eyeClass"
-              aria-hidden="true"
+          type="button"
+          @click="toggleVisibility"
+          id="togglePass"
+          :class="eyeClass"
+          aria-hidden="true"
         ></button>
       </div>
       <button>login</button>
@@ -56,12 +56,13 @@ export default {
     async handleLogin() {
       try {
         const usernameLowerCase = this.username.toLowerCase();
-        const user = await authService.login({ username: usernameLowerCase, password: this.password });
-        this.$router.push('/home');
-
-        console.log(user);
+        const user = await authService.login({
+          username: usernameLowerCase,
+          password: this.password,
+        });
 
         utils.setUser(user);
+        this.$router.push('/home');
       } catch (exception) {
         this.showNotification = !this.showNotification;
         setTimeout(() => {
@@ -101,13 +102,13 @@ export default {
   background: none;
 }
 #passwordDiv {
-    display:flex;
-    flex-direction:row;
-    margin: 0;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  justify-content: center;
 }
 #passwordDiv.input {
-    flex-grow:2;
-    border:none;
+  flex-grow: 2;
+  border: none;
 }
 </style>

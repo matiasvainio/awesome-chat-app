@@ -17,6 +17,7 @@ const user = require('./routes/user');
 const loginRouter = require('./routes/login');
 
 const Message = require('./models/message');
+const Room = require('./models/room');
 
 const server = require('http').createServer(app);
 
@@ -32,9 +33,6 @@ const io = require('socket.io')(server, {
 const changeStream = Message.watch();
 
 changeStream.on('change', (change) => {
-  console.log(change);
-
-  console.log('change');
   io.emit('change', change.fullDocument);
 });
 
@@ -52,12 +50,24 @@ app.use('/api/users', user);
 app.use('/api/messages', message);
 app.use('/api/login', loginRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+const roomStream = Room.watch();
+
+roomStream.on('change', (change) => {
+  io.emit('change-user', change.fullDocument);
 });
+
+io.on('connect', (socket) => {
+  socket.on('user-disconnect', (data) => {
+    io.emit('current-users', data);
+  });
+});
+
+// catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
 const options = {
   useNewUrlParser: true,
@@ -153,11 +163,11 @@ app.post('/signup', async (req, res) => {
     .catch((error) => console.error(error));
 });
 
-// if (process.env.NODE_ENV === 'production') {
-app.use(express.static(__dirname + '/public'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/public'));
 
-app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
-// }
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+}
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {

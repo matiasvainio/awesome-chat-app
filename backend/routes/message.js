@@ -91,6 +91,7 @@ router.put('/:id', async (req, res, next) => {
 
 /* DELETE MESSAGE */
 router.delete('/:id', async (req, res, next) => {
+  console.log('params', req.params);
   const token = getTokenFrom(req);
 
   const decodedToken = jwt.verify(token, process.env.SECRET);

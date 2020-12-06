@@ -1,5 +1,10 @@
 <template>
   <div class="chat">
+    <div class="users">
+      <div class="user-item" v-for="user in users" :key="user">
+        {{ user }}
+      </div>
+    </div>
     <div class="chat-messages">
       <ChatMessages
         :messages="messages"
@@ -16,6 +21,7 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
+import utils from '../utils/utils';
 import io from 'socket.io-client';
 
 export default {
@@ -26,20 +32,36 @@ export default {
   },
   data() {
     return {
+      room: {},
       messages: [],
+      users: [],
       socket: {},
-      key: this.id,
     };
   },
   created() {
+    // this.socket = io('https://awesome-chat-app-beta.herokuapp.com');
     this.socket = io('http://localhost:3000');
-    console.log('params', this.$route.params);
+    this.getRoom();
+    window.addEventListener('beforeunload', this.removeUserAfterClose);
   },
   mounted() {
     this.getMessages();
+    this.addUserToRoom();
+    this.socket.emit('conn-room', utils.getUser().data.username);
     this.socket.on('change', (data) => {
       this.getMessages();
     });
+    this.socket.on('change-user', (data) => {
+      this.getRoom();
+    });
+
+    this.socket.on('current-users', (data) => {
+      messageService.updateRoomUsers(this.$route.params.id, data);
+    });
+  },
+  beforeUnmount() {
+    this.removeUserFromRoom();
+    this.socket.off('change-user');
   },
   methods: {
     async addMessage(message) {
@@ -57,13 +79,50 @@ export default {
     async modifyMessage(message) {
       await messageService.modify(message);
     },
+    async getRoom() {
+      const rooms = await messageService.getRooms();
+      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
+      this.room = room;
+      this.users = room.users;
+    },
+    async addUserToRoom() {
+      const rooms = await messageService.getRooms();
+      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
+      room.users = room.users.concat(utils.getUser().data.username);
+      this.room = room;
+      this.users = room.users;
+      messageService.updateRoomUsers(this.$route.params.id, room);
+    },
+    removeUserFromRoom() {
+      const room = this.room;
+      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
+      messageService.updateRoomUsers(room.id, room);
+    },
+    removeUserAfterClose() {
+      const room = this.room;
+      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
+      messageService.updateRoomUsers(room.id, room);
+      this.socket.emit('user-disconnect', room);
+    },
   },
 };
 </script>
 
 <style scoped>
 .chat {
-  margin-bottom: 8em;
+  height: 1vh;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  grid-template-rows: 1fr 0.2fr;
+}
+
+.user-item {
+  margin: 0.2em;
+  background-color: #4c566a;
+  color: #eceff4;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: left;
 }
 
 .chat-messages {
@@ -73,8 +132,10 @@ export default {
 
 .message-form {
   background-color: #d8dee9;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   padding: 0.8em;
+  margin-top: 3em;
+  grid-column: 1/3;
 }
 </style>

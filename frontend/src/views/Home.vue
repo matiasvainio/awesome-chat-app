@@ -4,7 +4,7 @@
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
       <div v-for="room in rooms" :key="room.id">
-        <router-link :to="{ path: `/chat/${room.roomId}`, params: { foo: room._id } }">
+        <router-link :to="`/chat/${room.id}`">
           <h3>{{ room.roomName }}</h3>
         </router-link>
       </div>
@@ -23,6 +23,9 @@ export default {
       rooms: [],
       user: '',
     };
+  },
+  created() {
+    this.getCurrentUser();
   },
   mounted() {
     this.getRooms();

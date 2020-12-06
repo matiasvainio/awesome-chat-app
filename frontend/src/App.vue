@@ -12,10 +12,10 @@
           Home
         </router-link>
         <a href="#" @click="logout">Logout</a>
-        <a href="#" v-if="!this.$route.name" @click="showMenu">Menu</a>
+        <!-- <a href="#" v-if="!this.$route.name" @click="showMenu">Menu</a> -->
       </div>
     </div>
-    <router-view :menuVisible="menuVisible" />
+    <router-view />
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     return {
       isNotLogged: true,
       socket: {},
-      menuVisible: false,
+      // menuVisible: false,
     };
   },
   created() {
@@ -103,8 +103,8 @@ button:hover {
   padding: 30px;
   background-color: #4c566a;
   color: #eceff4;
-  position: fixed;
   width: 100%;
+  position: sticky;
   top: 0;
 }
 

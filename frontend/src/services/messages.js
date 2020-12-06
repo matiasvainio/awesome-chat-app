@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'api/rooms';
-const messageUrl = 'api/messages';
+const baseUrl = '/api/rooms';
+const messageUrl = '/api/messages';
 
 const authHeader = () => {
   const user = JSON.parse(window.localStorage.getItem('loggedChatAppUser'));
@@ -26,8 +26,8 @@ const getRooms = async () => {
   return response.data;
 };
 
-const updateRoomUsers = async () => {
-  const response = await axios.put(baseUrl);
+const updateRoomUsers = async (roomId, newRoom) => {
+  const response = await axios.put(`${baseUrl}/${roomId}`, newRoom, { headers: authHeader() });
   return response.data;
 };
 
@@ -45,10 +45,7 @@ const modify = async (message) => {
   const response = await axios.put(`${messageUrl}/${message.id}`, message, {
     headers: authHeader(),
   });
-
-  console.log(response);
-
   return response.data;
 };
 
-export default { getAll, create, getRooms, remove, modify };
+export default { getAll, create, getRooms, updateRoomUsers, remove, modify };

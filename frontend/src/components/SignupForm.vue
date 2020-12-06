@@ -45,6 +45,7 @@
 
 <script>
 import userService from '@/services/users';
+import authService from '@/services/auth';
 import utils from '@/utils/utils';
 
 export default {
@@ -53,18 +54,24 @@ export default {
       username: '',
       password: '',
       passwordFieldType: 'password',
-      eyeClass: 'fa fa-eye'
+      eyeClass: 'fa fa-eye',
     };
   },
   methods: {
-    handleSignup() {
+    async handleSignup() {
       const newUser = {
-        id: utils.getId(),
         username: this.username,
         password: this.password,
       };
 
-      userService.create(newUser);
+      const response = await userService.create(newUser);
+
+      const user = await authService.login({
+        username: newUser.username.toLowerCase(),
+        password: newUser.password,
+      });
+
+      utils.setUser(user);
       this.$router.push('/home');
     },
     toggleVisibility() {
@@ -100,13 +107,13 @@ input:valid {
   background: none;
 }
 #passwordDiv {
-    display:flex;
-    flex-direction:row;
-    margin: 0;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  justify-content: center;
 }
 #passwordDiv.input {
-    flex-grow:2;
-    border:none;
+  flex-grow: 2;
+  border: none;
 }
 </style>

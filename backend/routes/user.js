@@ -5,17 +5,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const { validateUser } = require('../validators/userValidator');
+const { response } = require('express');
 usersRouter.use(cors());
 usersRouter.use(bodyParser.urlencoded({ extended: true }));
 usersRouter.use(bodyParser.json());
 usersRouter.use(mongoSanitize());
 
 usersRouter.get('/', async (req, res) => {
-  const token = req.get('authorization');
+  // const token = req.get('authorization');
 
-  if (!token) {
-    res.status(401).json({ error: 'not authorized' });
-  }
+  // if (!token) {
+  //   res.status(401).json({ error: 'not authorized' });
+  // }
 
   const users = await User.find({});
   res.json(users);
@@ -24,13 +25,8 @@ usersRouter.get('/', async (req, res) => {
 usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
-<<<<<<< HEAD
-=======
-  console.log(body);
-
   const usernameLowerCase = JSON.stringify(body.username).toLowerCase();
 
->>>>>>> 78217333b6834fad19324e41b692712410722104
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
@@ -39,9 +35,13 @@ usersRouter.post('/', validateUser, async (req, res) => {
     passwordHash,
   });
 
-  const savedUser = await user.save();
-
-  res.json(savedUser);
+  const savedUser = await user.save((err) => {
+    if (err) {
+      res.status(400).json(err.message).end();
+    } else {
+      res.status(200).json(savedUser);
+    }
+  });
 });
 
 usersRouter.put('/', async (req, res) => {

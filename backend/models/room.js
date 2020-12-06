@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const RoomSchema = new mongoose.Schema({
-  roomId: Number,
+  roomId: String,
   roomName: String,
-  users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  users: [String],
 });
 
 RoomSchema.set('toJSON', {
@@ -11,6 +11,7 @@ RoomSchema.set('toJSON', {
     const returnableObject = object;
     delete returnableObject.__v;
     returnableObject.id = object._id;
+    // returnableObject._id = object.roomId;
     delete returnableObject._id;
     return returnableObject;
   },

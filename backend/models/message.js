@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const messageSchema = new mongoose.Schema({
-  roomId: Number,
+  roomId: String,
   content: String,
   date: { type: String, default: Date.now },
   user: String,
