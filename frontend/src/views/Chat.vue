@@ -1,6 +1,7 @@
 <template>
   <div class="chat">
     <div class="users">
+      <h3>Users:</h3>
       <div class="user-item" v-for="user in users" :key="user">
         {{ user }}
       </div>
@@ -110,7 +111,7 @@ export default {
 
 <style scoped>
 .chat {
-  height: 1vh;
+  height: 100vh;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   grid-template-rows: 1fr 0.2fr;
