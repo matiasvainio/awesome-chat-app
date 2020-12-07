@@ -1,9 +1,20 @@
 <template>
   <div :class="isUser ? 'message-container-user' : 'message-container-notuser'">
     <!-- <div class="icon"></div> -->
-    <div :class="isUser ? 'message-user' : 'message-notuser'" @click="showMenuButton">
-      <form class="modify-form" @submit.prevent="handleModify">
-        <input type="text" v-if="showInput" ref="modInput" v-bind:value="placeholder" />
+    <div
+      :class="isUser ? 'message-user' : 'message-notuser'"
+      @click="showMenuButton"
+    >
+      <form
+        class="modify-form"
+        @submit.prevent="handleModify"
+      >
+        <input
+          v-if="showInput"
+          ref="modInput"
+          type="text"
+          :value="placeholder"
+        >
       </form>
       <div v-if="!showInput">
         {{ message.content }}
@@ -14,10 +25,18 @@
       <div class="date">
         {{ message.date }}
       </div>
-      <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
+      <button
+        v-if="isUser & showMenu"
+        class="menu-button"
+        @click="removeMessage"
+      >
         Remove
       </button>
-      <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
+      <button
+        v-if="isUser & showMenu"
+        class="menu-button"
+        @click="showMod"
+      >
         {{ mod }}
       </button>
     </div>
@@ -39,13 +58,13 @@ export default {
       mod: 'Modify',
     };
   },
-  mounted() {
-    this.alignMessages();
-  },
   computed: {
     placeholder() {
       return this.message.content;
     },
+  },
+  mounted() {
+    this.alignMessages();
   },
   methods: {
     alignMessages() {
@@ -89,6 +108,7 @@ export default {
   text-align: left;
   display: flex;
   flex-direction: column;
+  max-width: 700px;
 }
 
 .message-container-notuser {
@@ -120,6 +140,7 @@ export default {
   text-align: left;
   display: flex;
   flex-direction: column;
+  max-width: 700px;
 }
 .user {
   font-size: 0.8em;

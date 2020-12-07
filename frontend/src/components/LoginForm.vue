@@ -5,25 +5,35 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text" id="username" />
+          <input
+            id="username"
+            v-model="username"
+            type="text"
+          >
         </div>
       </div>
       <label for="password">password</label>
       <div id="passwordDiv">
         <div>
-          <input v-model="password" :type="passwordFieldType" />
+          <input
+            v-model="password"
+            :type="passwordFieldType"
+          >
         </div>
         <button
-          type="button"
-          @click="toggleVisibility"
           id="togglePass"
+          type="button"
           :class="eyeClass"
           aria-hidden="true"
-        ></button>
+          @click="toggleVisibility"
+        />
       </div>
       <button>login</button>
     </form>
-    <div v-if="showNotification" class="login-notification">
+    <div
+      v-if="showNotification"
+      class="login-notification"
+    >
       <h3>Wrong username or password</h3>
     </div>
   </div>

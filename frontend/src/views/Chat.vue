@@ -2,7 +2,11 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div class="user-item" v-for="user in users" :key="user">
+      <div
+        v-for="user in users"
+        :key="user"
+        class="user-item"
+      >
         {{ user }}
       </div>
     </div>
@@ -12,7 +16,10 @@
       @remove-message="removeMessage"
       @modify-message="modifyMessage"
     />
-    <MessageForm class="message-form" @add-message="addMessage" />
+    <MessageForm
+      class="message-form"
+      @add-message="addMessage"
+    />
   </div>
 </template>
 
