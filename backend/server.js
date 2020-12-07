@@ -58,16 +58,18 @@ roomStream.on('change', (change) => {
 
 io.on('connect', (socket) => {
   socket.on('user-disconnect', (data) => {
+    console.log(data);
+
     io.emit('current-users', data);
   });
 });
 
 // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
+app.use(function (req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 const options = {
   useNewUrlParser: true,

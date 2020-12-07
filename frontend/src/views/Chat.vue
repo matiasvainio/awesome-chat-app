@@ -57,7 +57,9 @@ export default {
     });
 
     this.socket.on('current-users', (data) => {
-      messageService.updateRoomUsers(this.$route.params.id, data);
+      if (data.id === this.room.id) {
+        messageService.updateRoomUsers(this.$route.params.id, data);
+      }
     });
   },
   beforeUnmount() {
@@ -111,7 +113,6 @@ export default {
 
 <style scoped>
 .chat {
-  height: 100%;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   grid-template-rows: 1fr 0.01fr;
