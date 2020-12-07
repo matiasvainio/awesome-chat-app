@@ -49,4 +49,8 @@ export default {
 ul {
   list-style-type: none;
 }
+
+.message-list {
+  margin-bottom: 80px;
+}
 </style>
