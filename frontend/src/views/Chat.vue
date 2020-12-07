@@ -44,7 +44,6 @@ export default {
     this.socket = io('http://localhost:3000');
     this.getRoom();
     window.addEventListener('beforeunload', this.removeUserAfterClose);
-    console.log(foobar);
   },
   mounted() {
     this.getMessages();
