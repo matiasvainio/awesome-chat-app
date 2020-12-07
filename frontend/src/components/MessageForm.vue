@@ -58,7 +58,7 @@ export default {
 }
 
 .message-form input {
-  width: 80%;
+  width: 70%;
   border: none;
 }
 </style>

@@ -11,11 +11,13 @@
         <router-link to="/home">
           Home
         </router-link>
-        <a href="#" @click="logout">Logout</a>
-        <!-- <a href="#" v-if="!this.$route.name" @click="showMenu">Menu</a> -->
+        <a href="#" @click.prevent="logout">Logout</a>
+        <a href="#" @click.prevent="showMenu()">
+          Menu
+        </a>
       </div>
     </div>
-    <router-view />
+    <router-view :foobar="foobar" />
   </div>
 </template>
 
@@ -30,7 +32,6 @@ export default {
     return {
       isNotLogged: true,
       socket: {},
-      // menuVisible: false,
     };
   },
   created() {
@@ -51,7 +52,7 @@ export default {
       this.$router.push('/');
     },
     showMenu() {
-      this.menuVisible = !this.menuVisible;
+      console.log('foobar');
     },
   },
 };
@@ -68,7 +69,7 @@ export default {
 .parent-div {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -97,15 +98,17 @@ button:hover {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* height: 100vh; */
 }
 
 #nav {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
   padding: 30px;
   background-color: #4c566a;
   color: #eceff4;
   width: 100%;
-  position: sticky;
-  top: 0;
 }
 
 #nav a {
@@ -114,8 +117,8 @@ button:hover {
   text-decoration: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #e5e9f0;
+#nav a:hover {
+  color: #5e81ac;
 }
 
 .nav-links {
@@ -125,5 +128,15 @@ button:hover {
 
 input {
   padding: 10px 12px;
+}
+
+@media screen and (max-width: 800px) {
+  #nav {
+    padding: 10px;
+  }
+
+  #nav h1 {
+    font-size: 1.5em;
+  }
 }
 </style>

@@ -50,7 +50,7 @@ export default {
   justify-content: center;
   background-image: url('../res/bg2.jpg');
   background-size: cover;
-  height: 100%;
+  height: 88vh;
 }
 
 .room-links {

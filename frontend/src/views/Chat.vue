@@ -6,13 +6,12 @@
         {{ user }}
       </div>
     </div>
-    <div class="chat-messages">
-      <ChatMessages
-        :messages="messages"
-        @remove-message="removeMessage"
-        @modify-message="modifyMessage"
-      />
-    </div>
+    <ChatMessages
+      class="chat-messages"
+      :messages="messages"
+      @remove-message="removeMessage"
+      @modify-message="modifyMessage"
+    />
     <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
@@ -37,6 +36,7 @@ export default {
       messages: [],
       users: [],
       socket: {},
+      props: ['foobar'],
     };
   },
   created() {
@@ -44,6 +44,7 @@ export default {
     this.socket = io('http://localhost:3000');
     this.getRoom();
     window.addEventListener('beforeunload', this.removeUserAfterClose);
+    console.log(foobar);
   },
   mounted() {
     this.getMessages();
@@ -111,10 +112,16 @@ export default {
 
 <style scoped>
 .chat {
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
-  grid-template-rows: 1fr 0.2fr;
+  grid-template-rows: 1fr 0.01fr;
+}
+
+.users {
+  position: fixed;
+  top: 10em;
+  width: 15%;
 }
 
 .user-item {
@@ -127,8 +134,7 @@ export default {
 }
 
 .chat-messages {
-  margin-left: 1em;
-  margin-right: 1em;
+  grid-column: 2/2;
 }
 
 .message-form {
@@ -136,7 +142,16 @@ export default {
   position: sticky;
   bottom: 0;
   padding: 0.8em;
-  margin-top: 3em;
   grid-column: 1/3;
+}
+
+@media screen and (max-width: 800px) {
+  .chat-messages {
+    grid-column: 1/3;
+  }
+
+  .users {
+    display: none;
+  }
 }
 </style>

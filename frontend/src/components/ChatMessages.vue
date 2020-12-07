@@ -1,9 +1,6 @@
 <template>
   <div class="chat-messages">
     <div ref="messageList" class="message-list">
-      <button @click="scrollDown">
-        x
-      </button>
       <ul>
         <li v-for="message in messages" :key="message.id">
           <Message
