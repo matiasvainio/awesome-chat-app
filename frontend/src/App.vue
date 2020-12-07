@@ -51,9 +51,7 @@ export default {
       authService.logout();
       this.$router.push('/');
     },
-    showMenu() {
-      console.log('foobar');
-    },
+    showMenu() {},
   },
 };
 </script>
