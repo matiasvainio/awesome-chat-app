@@ -20,6 +20,7 @@
     "express-mongo-sanitize": "^2.0.1",
     "express-validator": "^6.7.0",
     "http": "0.0.1-security",
+    "js-alert": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.17",
