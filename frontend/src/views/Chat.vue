@@ -113,8 +113,9 @@ export default {
 
 <style scoped>
 .chat {
+  height: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 50px 0.5fr 1fr 50px;
   grid-template-rows: 1fr 0.01fr;
 }
 
@@ -122,19 +123,26 @@ export default {
   position: fixed;
   top: 10em;
   width: 15%;
+  height: 100%;
+  width: 25%;
+  overflow-y: scroll;
+  margin-left: 50px;
+  height: 67%;
 }
 
 .user-item {
   margin: 0.2em;
-  background-color: #4c566a;
-  color: #eceff4;
+  /* background-color: #4c566a; */
+  background-color: #d8dee9;
+  /* color: #eceff4; */
+  color: #4c566a;
   border-radius: 10px;
   padding: 10px 15px;
   text-align: left;
 }
 
 .chat-messages {
-  grid-column: 2/2;
+  grid-column: 3/4;
 }
 
 .message-form {
@@ -142,16 +150,21 @@ export default {
   position: sticky;
   bottom: 0;
   padding: 0.8em;
-  grid-column: 1/3;
+  grid-column: 1/5;
+  position: fixed;
 }
 
 @media screen and (max-width: 800px) {
   .chat-messages {
-    grid-column: 1/3;
+    grid-column: 1/5;
   }
 
   .users {
     display: none;
+  }
+
+  .message-form {
+    grid-column: 1/5;
   }
 }
 </style>

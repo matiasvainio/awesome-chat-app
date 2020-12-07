@@ -1,6 +1,6 @@
 <template>
   <div v-if="user" class="home">
-    <h1>home</h1>
+    <h1>Home</h1>
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
       <div v-for="room in rooms" :key="room.id">
