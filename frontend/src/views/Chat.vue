@@ -2,11 +2,7 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div
-        v-for="user in users"
-        :key="user"
-        class="user-item"
-      >
+      <div v-for="user in users" :key="user" class="user-item">
         {{ user }}
       </div>
     </div>
@@ -16,10 +12,7 @@
       @remove-message="removeMessage"
       @modify-message="modifyMessage"
     />
-    <MessageForm
-      class="message-form"
-      @add-message="addMessage"
-    />
+    <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
 
@@ -47,8 +40,9 @@ export default {
     };
   },
   created() {
-    // this.socket = io('https://awesome-chat-app-beta.herokuapp.com');
-    this.socket = io('http://localhost:3000');
+    if (process.env.NODE_ENV === 'production')
+      this.socket = io('https://awesome-chat-app-beta.herokuapp.com');
+    else this.socket = io('http://localhost:3000');
     this.getRoom();
     window.addEventListener('beforeunload', this.removeUserAfterClose);
   },
@@ -161,7 +155,7 @@ export default {
   position: fixed;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
   .chat-messages {
     grid-column: 1/5;
   }

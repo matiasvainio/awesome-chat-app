@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint",
     "start": "node index.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "publish": "cd ../frontend && npm run build && cd ../backend && git add . && git commit -m 'publish to heroku' && git push heroku master "
   },
   "author": "",
   "license": "ISC",

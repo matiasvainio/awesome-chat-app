@@ -1,7 +1,12 @@
 import axios from 'axios';
 
-const baseUrl = '/api/rooms';
-const messageUrl = '/api/messages';
+let baseUrl = 'http://localhost:3000/api/rooms';
+let messageUrl = 'http://localhost:3000/api/messages';
+
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = '/api/rooms';
+  messageUrl = '/api/messages';
+}
 
 const authHeader = () => {
   const user = JSON.parse(window.localStorage.getItem('loggedChatAppUser'));
