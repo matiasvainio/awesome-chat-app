@@ -40,9 +40,12 @@ export default {
     };
   },
   created() {
-    if (process.env.NODE_ENV === 'production')
+    if (process.env.NODE_ENV === 'production') {
       this.socket = io('https://awesome-chat-app-beta.herokuapp.com');
-    else this.socket = io('http://localhost:3000');
+    } else {
+      this.socket = io('http://localhost:3000');
+    }
+
     this.getRoom();
     window.addEventListener('beforeunload', this.removeUserAfterClose);
   },
