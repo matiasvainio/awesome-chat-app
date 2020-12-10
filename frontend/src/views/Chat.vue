@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
@@ -36,7 +35,6 @@ export default {
       messages: [],
       users: [],
       socket: {},
-      props: ['foobar'],
     };
   },
   created() {
@@ -102,12 +100,12 @@ export default {
       room.users = room.users.filter((user) => user !== utils.getUser().data.username);
       messageService.updateRoomUsers(room.id, room);
     },
-    removeUserAfterClose() {
-      const room = this.room;
-      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
-      messageService.updateRoomUsers(room.id, room);
-      this.socket.emit('user-disconnect', room);
-    },
+    // removeUserAfterClose() {
+    //   const room = this.room;
+    //   room.users = room.users.filter((user) => user !== utils.getUser().data.username);
+    //   messageService.updateRoomUsers(room.id, room);
+    //   this.socket.emit('user-disconnect', room);
+    // },
   },
 };
 </script>

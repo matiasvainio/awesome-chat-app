@@ -26,16 +26,6 @@ const getAll = async (id) => {
   return response.data;
 };
 
-const getRooms = async () => {
-  const response = await axios.get(baseUrl, { headers: authHeader() });
-  return response.data;
-};
-
-const updateRoomUsers = async (roomId, newRoom) => {
-  const response = await axios.put(`${baseUrl}/${roomId}`, newRoom, { headers: authHeader() });
-  return response.data;
-};
-
 const create = async (object) => {
   const response = await axios.post(messageUrl, object, { headers: authHeader() });
   return response.data;
