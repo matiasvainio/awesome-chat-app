@@ -6,6 +6,15 @@ if (process.env.NODE_ENV === 'production') {
   baseUrl = '/api/rooms';
 }
 
+const authHeader = () => {
+  const user = JSON.parse(window.localStorage.getItem('loggedChatAppUser'));
+
+  if (user && user.data.token) {
+    return { Authorization: `bearer ${user.data.token}` };
+  }
+  return {};
+};
+
 const getRooms = async () => {
   const response = await axios.get(baseUrl, { headers: authHeader() });
   return response.data;

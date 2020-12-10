@@ -1,15 +1,9 @@
 <template>
-  <div
-    v-if="user"
-    class="home"
-  >
+  <div v-if="user" class="home">
     <h1>Home</h1>
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
-      <div
-        v-for="room in rooms"
-        :key="room.id"
-      >
+      <div v-for="room in rooms" :key="room.id">
         <router-link :to="`/chat/${room.id}`">
           <h3>{{ room.roomName }}</h3>
         </router-link>
@@ -20,6 +14,7 @@
 
 <script>
 import messageService from '@/services/messages';
+import roomService from '@/services/rooms';
 import utils from '../utils/utils';
 
 export default {
@@ -39,7 +34,7 @@ export default {
   },
   methods: {
     async getRooms() {
-      this.rooms = await messageService.getRooms();
+      this.rooms = await roomService.getRooms();
     },
     getCurrentUser() {
       const user = utils.getUser();

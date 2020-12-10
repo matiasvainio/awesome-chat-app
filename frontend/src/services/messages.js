@@ -43,4 +43,4 @@ const modify = async (message) => {
   return response.data;
 };
 
-export default { getAll, create, getRooms, updateRoomUsers, remove, modify };
+export default { getAll, create, remove, modify };
