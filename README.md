@@ -1,1 +1,2 @@
-![alt text](https://gitlab.metropolia.fi/matiasva/awesome-chat-app/-/blob/master/img/Screenshot%20from%202020-12-10%2012-52-31.png?raw=true)
+![Screenshot](screenshot_1.png)
+![Screenshot](screenshot_2.png)
