@@ -12,9 +12,9 @@
           Home
         </router-link>
         <a href="#" @click.prevent="logout">Logout</a>
-        <a href="#" @click.prevent="showMenu()">
+        <!-- <a href="#" @click.prevent="showMenu()">
           Menu
-        </a>
+        </a> -->
       </div>
     </div>
     <router-view :foobar="foobar" />
@@ -33,9 +33,6 @@ export default {
       isNotLogged: true,
       socket: {},
     };
-  },
-  created() {
-    // this.socket = io('http://localhost:3000/');
   },
   mounted() {
     this.checkIfLoggedIn();

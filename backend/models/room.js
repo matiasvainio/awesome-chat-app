@@ -11,7 +11,6 @@ RoomSchema.set('toJSON', {
     const returnableObject = object;
     delete returnableObject.__v;
     returnableObject.id = object._id;
-    // returnableObject._id = object.roomId;
     delete returnableObject._id;
     return returnableObject;
   },

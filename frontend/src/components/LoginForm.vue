@@ -5,7 +5,7 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input v-model="username" type="text" id="username" />
+          <input id="username" v-model="username" type="text" />
         </div>
       </div>
       <label for="password">password</label>
@@ -14,12 +14,12 @@
           <input v-model="password" :type="passwordFieldType" />
         </div>
         <button
-          type="button"
-          @click="toggleVisibility"
           id="togglePass"
+          type="button"
           :class="eyeClass"
           aria-hidden="true"
-        ></button>
+          @click="toggleVisibility"
+        />
       </div>
       <button>login</button>
     </form>
@@ -110,5 +110,17 @@ export default {
 #passwordDiv.input {
   flex-grow: 2;
   border: none;
+}
+.login-notification {
+  border: none;
+  color: white;
+  background-color: #4c566a;
+  padding: 15px 30px;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 50%;
+  margin: auto;
 }
 </style>
