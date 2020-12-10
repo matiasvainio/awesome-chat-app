@@ -2,8 +2,8 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div v-for="user in users" :key="user" class="user-item scale-in-center">
-        {{ user }}
+      <div v-for="user in users" :key="user.id" class="user-item scale-in-center">
+        {{ user.username }}
       </div>
     </div>
     <ChatMessages
@@ -21,6 +21,7 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
+import userService from '@/services/users';
 import utils from '../utils/utils';
 import io from 'socket.io-client';
 
@@ -36,7 +37,7 @@ export default {
       messages: [],
       users: [],
       socket: {},
-      props: ['foobar'],
+      user: {},
     };
   },
   created() {
@@ -45,30 +46,36 @@ export default {
     } else {
       this.socket = io('http://localhost:3000');
     }
-
-    this.getRoom();
-    window.addEventListener('beforeunload', this.removeUserAfterClose);
+    // Setup current room
+    this.setupRoom();
+    // window.addEventListener('beforeunload', this.removeUserAfterClose);
   },
   mounted() {
     this.getMessages();
     this.addUserToRoom();
-    this.socket.emit('conn-room', utils.getUser().data.username);
+    this.addRoomTouser();
+    // this.socket.emit('conn-room', utils.getUser().data.username);
     this.socket.on('change', (data) => {
       this.getMessages();
     });
-    this.socket.on('change-user', (data) => {
-      this.getRoom();
+
+    this.socket.on('user-change', (data) => {
+      this.setupRoom();
     });
 
-    this.socket.on('current-users', (data) => {
-      if (data.id === this.room.id) {
-        messageService.updateRoomUsers(this.$route.params.id, data);
-      }
-    });
+    // this.socket.on('change-user', (data) => {
+    //   this.getRoom();
+    // });
+
+    // this.socket.on('current-users', (data) => {
+    //   if (data.id === this.room.id) {
+    //     messageService.updateRoomUsers(this.$route.params.id, data);
+    //   }
+    // });
   },
   beforeUnmount() {
     this.removeUserFromRoom();
-    this.socket.off('change-user');
+    this.socket.off('user-change');
   },
   methods: {
     async addMessage(message) {
@@ -79,6 +86,9 @@ export default {
       const m = await messageService.getAll(this.$route.params.id);
       this.messages = m;
     },
+    async getRoom() {
+      this.room = await messageService.getRoom(this.$route.params.id);
+    },
     async removeMessage(id) {
       await messageService.remove(id);
       await this.getMessages();
@@ -86,30 +96,47 @@ export default {
     async modifyMessage(message) {
       await messageService.modify(message);
     },
-    async getRoom() {
-      const rooms = await messageService.getRooms();
-      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
-      this.room = room;
-      this.users = room.users;
+    async setupRoom() {
+      // this.room = await messageService.getRoom(this.$route.params.id);
+      const users = await userService.getAll();
+      this.users = users.filter((user) => {
+        if (user.room) {
+          if (user.room.id === this.$route.params.id) {
+            return user;
+          }
+        }
+      });
+      this.user = this.users.filter((user) => user.id === utils.getUser().data.id);
     },
     async addUserToRoom() {
-      const rooms = await messageService.getRooms();
-      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
-      room.users = room.users.concat(utils.getUser().data.username);
+      // const rooms = await messageService.getRooms();
+      // const user = await userService.getOne(utils.getUser().data.id);
+      // const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
+      // room.users = room.users.concat(utils.getUser().data);
+      // this.room = room;
+      // this.users = room.users;
+      // messageService.updateRoomUsers(this.$route.params.id, room);
+      const room = await messageService.getRoom(this.$route.params.id);
+      // room.users = [...room.users];
       this.room = room;
-      this.users = room.users;
-      messageService.updateRoomUsers(this.$route.params.id, room);
     },
-    removeUserFromRoom() {
-      const room = this.room;
-      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
-      messageService.updateRoomUsers(room.id, room);
+    async removeUserFromRoom() {
+      const newUser = this.user[0];
+      newUser.room = null;
+      await userService.modify(newUser);
+      // await messageService.updateRoomUsers(this.$route.params.id, )
     },
-    removeUserAfterClose() {
-      const room = this.room;
-      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
-      messageService.updateRoomUsers(room.id, room);
-      this.socket.emit('user-disconnect', room);
+    // removeUserAfterClose() {
+    //   const room = this.room;
+    //   room.users = room.users.filter((user) => user !== utils.getUser().data.username);
+    //   messageService.updateRoomUsers(room.id, room);
+    //   this.socket.emit('user-disconnect', room);
+    // },
+    async addRoomTouser() {
+      const currUser = await userService.getUser(utils.getUser().data.id);
+      const currRoom = this.$route.params.id;
+      currUser.room = currRoom;
+      userService.modify(currUser);
     },
   },
 };

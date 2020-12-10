@@ -31,6 +31,11 @@ const getRooms = async () => {
   return response.data;
 };
 
+const getRoom = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 const updateRoomUsers = async (roomId, newRoom) => {
   const response = await axios.put(`${baseUrl}/${roomId}`, newRoom, { headers: authHeader() });
   return response.data;
@@ -53,4 +58,4 @@ const modify = async (message) => {
   return response.data;
 };
 
-export default { getAll, create, getRooms, updateRoomUsers, remove, modify };
+export default { getAll, create, getRoom, getRooms, updateRoomUsers, remove, modify };

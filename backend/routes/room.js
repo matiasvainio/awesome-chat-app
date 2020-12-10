@@ -2,24 +2,31 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../models/room.js');
 
+const User = require('../models/user');
+
 const cors = require('cors');
 
 router.use(cors());
 
+// const userStream = User.watch();
+// userStream.on('change', (change) => {
+//   console.log('muutos');
+// });
+
 /* GET ALL ROOMS */
-router.get('/', function (req, res, next) {
-  Room.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
+router.get('/', async (req, res, next) => {
+  const rooms = await Room.find({}).populate('users', {
+    // room: 0,
   });
+
+  res.json(rooms.map((room) => room.toJSON()));
 });
 
 /* GET SINGLE ROOM BY ID */
-router.get('/:id', function (req, res, next) {
-  Room.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+router.get('/:id', async (req, res, next) => {
+  const rooms = await Room.findById(req.params.id).populate('users');
+
+  res.json(rooms);
 });
 
 /* SAVE ROOM */
