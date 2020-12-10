@@ -2,17 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../models/room.js');
 
-const User = require('../models/user');
-
-const cors = require('cors');
-
-router.use(cors());
-
-// const userStream = User.watch();
-// userStream.on('change', (change) => {
-//   console.log('muutos');
-// });
-
 /* GET ALL ROOMS */
 router.get('/', async (req, res, next) => {
   const rooms = await Room.find({}).populate('users', {

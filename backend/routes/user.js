@@ -55,8 +55,6 @@ usersRouter.post('/', validateUser, async (req, res) => {
 
 usersRouter.put('/:id', async (req, res) => {
   // Todo err handling
-  console.log('foobar');
-
   const { body } = req;
   try {
     const returned = await User.findByIdAndUpdate(req.params.id, body, {

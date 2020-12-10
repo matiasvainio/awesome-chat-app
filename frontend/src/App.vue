@@ -1,6 +1,9 @@
 <template>
   <div class="parent-div">
-    <div v-if="$route.meta.header === none" id="nav">
+    <div
+      v-if="$route.meta.header === none"
+      id="nav"
+    >
       <div>
         <h1>Awesome Chat App Beta</h1>
       </div>
@@ -11,15 +14,13 @@
         <router-link to="/home">
           Home
         </router-link>
-        <a href="#" @click.prevent="logout">Logout</a>
-        <!-- <a href="#" @click.prevent="showMenu()">
-          Menu
-        </a> -->
+        <a
+          href="#"
+          @click.prevent="logout"
+        >Logout</a>
       </div>
     </div>
-    <!-- <transition> -->
     <router-view />
-    <!-- </transition> -->
   </div>
 </template>
 

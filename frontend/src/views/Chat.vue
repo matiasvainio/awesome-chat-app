@@ -2,8 +2,12 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div v-for="user in users" :key="user.id" class="user-item scale-in-center">
-        {{ user.username }}
+      <div
+        v-for="userItem in users"
+        :key="userItem.id"
+        class="user-item scale-in-center"
+      >
+        {{ userItem.username }}
       </div>
     </div>
     <ChatMessages
@@ -12,7 +16,10 @@
       @remove-message="removeMessage"
       @modify-message="modifyMessage"
     />
-    <MessageForm class="message-form" @add-message="addMessage" />
+    <MessageForm
+      class="message-form"
+      @add-message="addMessage"
+    />
   </div>
 </template>
 
@@ -126,9 +133,7 @@ export default {
 
 .user-item {
   margin: 0.2em;
-  /* background-color: #4c566a; */
   background-color: #d8dee9;
-  /* color: #eceff4; */
   color: #4c566a;
   border-radius: 10px;
   padding: 10px 15px;

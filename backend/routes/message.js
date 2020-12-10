@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/message.js');
-const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 
-router.use(cors());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 router.use(mongoSanitize());

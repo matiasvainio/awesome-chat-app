@@ -1,9 +1,15 @@
 <template>
-  <div v-if="user" class="home">
+  <div
+    v-if="user"
+    class="home"
+  >
     <h1>Home</h1>
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
-      <div v-for="room in rooms" :key="room.id">
+      <div
+        v-for="room in rooms"
+        :key="room.id"
+      >
         <router-link :to="`/chat/${room.id}`">
           <h3>{{ room.roomName }}</h3>
         </router-link>

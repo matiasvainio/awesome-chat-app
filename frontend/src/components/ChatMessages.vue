@@ -30,7 +30,16 @@ export default {
   components: {
     Message,
   },
-  props: ['messages'],
+  props: {
+    messages: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+  emits: ['remove-message', 'modify-message'],
+
   updated() {
     setTimeout(() => {
       this.scrollDown();
@@ -44,7 +53,6 @@ export default {
       this.$emit('modify-message', message);
     },
     scrollDown() {
-      // console.log('scroll height', this.$refs.messageList.scrollHeight);
       window.scrollTo(0, this.$refs.messageList.scrollHeight);
     },
   },
