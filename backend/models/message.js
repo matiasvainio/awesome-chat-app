@@ -12,7 +12,6 @@ messageSchema.set('toJSON', {
   transform: (doc, object) => {
     const returnableObject = object;
     delete returnableObject.__v;
-    delete returnableObject.passwordHash;
     returnableObject.id = object._id.toString();
     delete returnableObject._id;
     return returnableObject;
