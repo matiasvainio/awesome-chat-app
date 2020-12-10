@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-let baseUrl = 'http://localhost:3000/api/rooms';
 let messageUrl = 'http://localhost:3000/api/messages';
 
 if (process.env.NODE_ENV === 'production') {
-  baseUrl = '/api/rooms';
   messageUrl = '/api/messages';
 }
 

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   passwordHash: String,
-  room: String,
+  room: { type: mongoose.Schema.Types.ObjectId, ref: 'Room' },
 });
 
 userSchema.set('toJSON', {

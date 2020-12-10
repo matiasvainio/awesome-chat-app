@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const RoomSchema = new mongoose.Schema({
   roomId: String,
   roomName: String,
-  users: [String],
+  users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 RoomSchema.set('toJSON', {

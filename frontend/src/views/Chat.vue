@@ -2,8 +2,8 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div v-for="user in users" :key="user" class="user-item">
-        {{ user }}
+      <div v-for="user in users" :key="user.id" class="user-item scale-in-center">
+        {{ user.username }}
       </div>
     </div>
     <ChatMessages
@@ -20,6 +20,8 @@
 import ChatMessages from '@/components/ChatMessages.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import messageService from '@/services/messages';
+import userService from '@/services/users';
+import roomService from '@/services/rooms';
 import utils from '../utils/utils';
 import io from 'socket.io-client';
 
@@ -35,35 +37,31 @@ export default {
       messages: [],
       users: [],
       socket: {},
+      user: {},
     };
   },
   created() {
-    if (process.env.NODE_ENV === 'production')
+    if (process.env.NODE_ENV === 'production') {
       this.socket = io('https://awesome-chat-app-beta.herokuapp.com');
-    else this.socket = io('http://localhost:3000');
-    this.getRoom();
-    window.addEventListener('beforeunload', this.removeUserAfterClose);
+    } else {
+      this.socket = io('http://localhost:3000');
+    }
   },
   mounted() {
+    this.setupRoom();
     this.getMessages();
-    this.addUserToRoom();
-    this.socket.emit('conn-room', utils.getUser().data.username);
+    this.addRoomTouser();
     this.socket.on('change', (data) => {
       this.getMessages();
     });
-    this.socket.on('change-user', (data) => {
-      this.getRoom();
-    });
 
-    this.socket.on('current-users', (data) => {
-      if (data.id === this.room.id) {
-        messageService.updateRoomUsers(this.$route.params.id, data);
-      }
+    this.socket.on('user-change', (data) => {
+      this.setupRoom();
     });
   },
   beforeUnmount() {
     this.removeUserFromRoom();
-    this.socket.off('change-user');
+    this.socket.off('user-change');
   },
   methods: {
     async addMessage(message) {
@@ -81,31 +79,28 @@ export default {
     async modifyMessage(message) {
       await messageService.modify(message);
     },
-    async getRoom() {
-      const rooms = await messageService.getRooms();
-      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
-      this.room = room;
-      this.users = room.users;
+    async setupRoom() {
+      const users = await userService.getAll();
+      this.users = users.filter((user) => {
+        if (user.room) {
+          if (user.room.id === this.$route.params.id) {
+            return user;
+          }
+        }
+      });
+      this.user = this.users.filter((user) => user.id === utils.getUser().data.id);
     },
-    async addUserToRoom() {
-      const rooms = await messageService.getRooms();
-      const room = rooms.filter((room) => room.id === this.$route.params.id)[0];
-      room.users = room.users.concat(utils.getUser().data.username);
-      this.room = room;
-      this.users = room.users;
-      messageService.updateRoomUsers(this.$route.params.id, room);
+    async removeUserFromRoom() {
+      const newUser = this.user[0];
+      newUser.room = null;
+      await userService.modify(newUser);
     },
-    removeUserFromRoom() {
-      const room = this.room;
-      room.users = room.users.filter((user) => user !== utils.getUser().data.username);
-      messageService.updateRoomUsers(room.id, room);
+    async addRoomTouser() {
+      const currUser = await userService.getUser(utils.getUser().data.id);
+      const currRoom = this.$route.params.id;
+      currUser.room = currRoom;
+      userService.modify(currUser);
     },
-    // removeUserAfterClose() {
-    //   const room = this.room;
-    //   room.users = room.users.filter((user) => user !== utils.getUser().data.username);
-    //   messageService.updateRoomUsers(room.id, room);
-    //   this.socket.emit('user-disconnect', room);
-    // },
   },
 };
 </script>
@@ -151,6 +146,42 @@ export default {
   padding: 0.8em;
   grid-column: 1/5;
   position: fixed;
+}
+
+.scale-in-center {
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.scale-out-center {
+  -webkit-animation: scale-out-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: scale-out-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-out-center {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 1200px) {

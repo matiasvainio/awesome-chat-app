@@ -18,6 +18,7 @@ const loginRouter = require('./routes/login');
 
 const Message = require('./models/message');
 const Room = require('./models/room');
+const User = require('./models/user');
 
 const server = require('http').createServer(app);
 
@@ -50,18 +51,33 @@ app.use('/api/users', user);
 app.use('/api/messages', message);
 app.use('/api/login', loginRouter);
 
-const roomStream = Room.watch();
+// const roomStream = Room.watch();
 
-roomStream.on('change', (change) => {
-  io.emit('change-user', change.fullDocument);
-});
+// roomStream.on('change', (change) => {
+//   // io.emit('change-user', change.fullDocument);
+//   // console.log('change', change);
+//   console.log('huone muuttui');
+// });
 
-io.on('connect', (socket) => {
-  socket.on('user-disconnect', (data) => {
-    console.log(data);
+// io.on('connect', (socket) => {
+//   socket.on('user-disconnect', (data) => {
+//     console.log(data);
 
-    io.emit('current-users', data);
-  });
+//     io.emit('current-users', data);
+
+//     socket.on('test', (data) => {
+//       console.log(data);
+//     });
+//   });
+//   socket.on('test', (data) => {
+//     console.log('data');
+//   });
+// });
+
+const userStream = User.watch();
+
+userStream.on('change', (change) => {
+  io.emit('user-change');
 });
 
 // catch 404 and forward to error handler
@@ -83,14 +99,8 @@ const options = {
   family: 4, // Use IPv4, skip trying IPv6
 };
 
-// mongoose.Promise = require('bluebird');
 mongoose
-  .connect(
-    process.env.MONGODB_URI,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-    // { promiseLibrary: require('bluebird') },
-    // options
-  )
+  .connect(process.env.MONGODB_URI, options)
   .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
 

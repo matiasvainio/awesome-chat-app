@@ -20,9 +20,24 @@ const getAll = async () => {
   return response.data;
 };
 
+const getUser = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 const create = async (object) => {
   const response = await axios.post(baseUrl, object);
   return response.data;
 };
 
-export default { getAll, create };
+const modify = async (user) => {
+  const response = await axios.put(`${baseUrl}/${user.id}`, user, { headers: authHeader() });
+  return response.data;
+};
+
+const remove = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  return response.data;
+};
+
+export default { getAll, getUser, create, modify, remove };

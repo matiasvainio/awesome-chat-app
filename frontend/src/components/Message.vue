@@ -3,18 +3,11 @@
     <!-- <div class="icon"></div> -->
     <div
       :class="isUser ? 'message-user' : 'message-notuser'"
+      class="scale-in-bottom"
       @click="showMenuButton"
     >
-      <form
-        class="modify-form"
-        @submit.prevent="handleModify"
-      >
-        <input
-          v-if="showInput"
-          ref="modInput"
-          type="text"
-          :value="placeholder"
-        >
+      <form class="modify-form" @submit.prevent="handleModify">
+        <input v-if="showInput" ref="modInput" type="text" :value="placeholder" />
       </form>
       <div v-if="!showInput">
         {{ message.content }}
@@ -25,18 +18,10 @@
       <div class="date">
         {{ message.date }}
       </div>
-      <button
-        v-if="isUser & showMenu"
-        class="menu-button"
-        @click="removeMessage"
-      >
+      <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
         Remove
       </button>
-      <button
-        v-if="isUser & showMenu"
-        class="menu-button"
-        @click="showMod"
-      >
+      <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
         {{ mod }}
       </button>
     </div>
@@ -169,5 +154,22 @@ export default {
   width: auto;
   border: none;
   height: 2em;
+}
+
+.scale-in-bottom {
+  animation: scale-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes scale-in-bottom {
+  0% {
+    transform: scale(0);
+    transform-origin: 50% 100%;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: 50% 100%;
+    opacity: 1;
+  }
 }
 </style>

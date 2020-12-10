@@ -17,7 +17,9 @@
         </a> -->
       </div>
     </div>
-    <router-view :foobar="foobar" />
+    <!-- <transition> -->
+    <router-view />
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -105,6 +107,7 @@ button:hover {
   background-color: #4c566a;
   color: #eceff4;
   width: 100%;
+  z-index: 99999999;
 }
 
 #nav a {

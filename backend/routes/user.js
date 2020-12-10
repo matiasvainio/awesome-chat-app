@@ -18,8 +18,17 @@ usersRouter.get('/', async (req, res) => {
   //   res.status(401).json({ error: 'not authorized' });
   // }
 
-  const users = await User.find({});
+  const users = await User.find({}).populate('room', { users: 0 });
   res.json(users);
+});
+
+usersRouter.get('/:id', async (req, res) => {
+  try {
+    const returned = await User.findById(req.params.id);
+    res.json(returned.toJSON());
+  } catch (exception) {
+    response.sendStatus(404);
+  }
 });
 
 usersRouter.post('/', validateUser, async (req, res) => {
@@ -44,15 +53,24 @@ usersRouter.post('/', validateUser, async (req, res) => {
   });
 });
 
-usersRouter.put('/', async (req, res) => {
+usersRouter.put('/:id', async (req, res) => {
+  // Todo err handling
+  console.log('foobar');
+
+  const { body } = req;
   try {
     const returned = await User.findByIdAndUpdate(req.params.id, body, {
       new: true,
     });
     res.json(returned.toJSON());
-  } catch (exception) {
-    response.sendStatus(404);
+  } catch (err) {
+    res.sendStatus(404);
   }
+});
+
+usersRouter.delete('/:id', async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  return res.status(204).end();
 });
 
 module.exports = usersRouter;

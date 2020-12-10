@@ -20,9 +20,16 @@ const getRooms = async () => {
   return response.data;
 };
 
-const updateRoomUsers = async (roomId, newRoom) => {
-  const response = await axios.put(`${baseUrl}/${roomId}`, newRoom, { headers: authHeader() });
+const getRoom = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
   return response.data;
 };
 
-export default { getRooms, updateRoomUsers };
+const updateRoomUsers = async (newRoom) => {
+  const response = await axios.put(`${baseUrl}/${newRoom.id}`, newRoom, {
+    headers: authHeader(),
+  });
+  return response.data;
+};
+
+export default { getRooms, getRoom, updateRoomUsers };
