@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
+/**
+ * Creates mongoose schema for Message model.
+ * @param {string} roomId Id of the room where message was sent
+ * @param {string} content Content of the message
+ * @param {string} date Time when message was sent
+ * @param {string} user User who sent the message
+ */
 const messageSchema = new mongoose.Schema({
   roomId: String,
   content: String,

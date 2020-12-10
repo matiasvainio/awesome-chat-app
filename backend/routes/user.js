@@ -11,17 +11,26 @@ usersRouter.use(bodyParser.urlencoded({ extended: true }));
 usersRouter.use(bodyParser.json());
 usersRouter.use(mongoSanitize());
 
+/**
+ * Gets users and populates room.
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ */
 usersRouter.get('/', async (req, res) => {
   // const token = req.get('authorization');
 
   // if (!token) {
   //   res.status(401).json({ error: 'not authorized' });
   // }
-
   const users = await User.find({}).populate('room', { users: 0 });
   res.json(users);
 });
 
+/**
+ * Gets one use by given id.
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ */
 usersRouter.get('/:id', async (req, res) => {
   try {
     const returned = await User.findById(req.params.id);
@@ -31,6 +40,11 @@ usersRouter.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * Add new user to database based on data from express post method.
+ * @param {string} req Express post request
+ * @param {string} res Express post result
+ */
 usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
@@ -53,6 +67,11 @@ usersRouter.post('/', validateUser, async (req, res) => {
   });
 });
 
+/**
+ * Updates user based on data from express put method.
+ * @param {string} req Express put request
+ * @param {string} res Express put result
+ */
 usersRouter.put('/:id', async (req, res) => {
   // Todo err handling
   const { body } = req;
@@ -66,6 +85,11 @@ usersRouter.put('/:id', async (req, res) => {
   }
 });
 
+/**
+ * Deletes user based on data from express delete method.
+ * @param {string} req Express delete request
+ * @param {string} res Express delete result
+ */
 usersRouter.delete('/:id', async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
   return res.status(204).end();

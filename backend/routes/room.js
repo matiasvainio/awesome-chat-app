@@ -3,6 +3,11 @@ const router = express.Router();
 const Room = require('../models/room.js');
 
 /* GET ALL ROOMS */
+/**
+ * Gets all rooms.
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ */
 router.get('/', async (req, res, next) => {
   const rooms = await Room.find({}).populate('users', {
     room: 0,
@@ -12,6 +17,11 @@ router.get('/', async (req, res, next) => {
 });
 
 /* GET SINGLE ROOM BY ID */
+/**
+ * Gets single room by id.
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ */
 router.get('/:id', async (req, res, next) => {
   const rooms = await Room.findById(req.params.id).populate('users');
 

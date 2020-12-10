@@ -3,6 +3,11 @@ const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const User = require('../models/user');
 
+/**
+ * Gets user information given by user and compares it to information form database.
+ * @param {string} req Express request
+ * @param {string} res Express result
+ */
 loginRouter.post('/', async (req, res) => {
   const { body } = req;
 

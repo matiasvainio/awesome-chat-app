@@ -19,6 +19,11 @@ const getTokenFrom = (req) => {
 };
 
 /* GET ALL MESSAGES */
+/**
+ * Gets all messages.
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ */
 router.get('/', async (req, res, next) => {
   const token = getTokenFrom(req);
   if (!token) {
@@ -37,6 +42,11 @@ router.get('/', async (req, res, next) => {
 });
 
 /* GET SINGLE MESSAGE BY ID */
+/**
+ * Gets single message by id.
+ * @param {string} req Express request
+ * @param {string} res Express result
+ */
 router.get('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
@@ -52,6 +62,11 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* SAVE MESSAGE */
+/**
+ * Saves message to database.
+ * @param {string} req Express request
+ * @param {string} res Express result
+ */
 router.post('/', async (req, res, next) => {
   const token = getTokenFrom(req);
 
@@ -67,6 +82,11 @@ router.post('/', async (req, res, next) => {
 });
 
 /* UPDATE MESSAGE */
+/**
+ * Updates selected message.
+ * @param {string} req Express request
+ * @param {string} res Express result
+ */
 router.put('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
@@ -88,6 +108,11 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /* DELETE MESSAGE */
+/**
+ * Delete selected message.
+ * @param {string} req Express request
+ * @param {string} res Express result
+ */
 router.delete('/:id', async (req, res, next) => {
   console.log('params', req.params);
   const token = getTokenFrom(req);

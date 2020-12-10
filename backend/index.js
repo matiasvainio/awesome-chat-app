@@ -30,12 +30,20 @@ const io = require('socket.io')(server, {
 
 const changeStream = Message.watch();
 
+/**
+ * Watches the underlying collection for changes using MongoDB change streams.
+ * @param {any} change
+ */
 changeStream.on('change', (change) => {
   io.emit('change', change.fullDocument);
 });
 
 const userStream = User.watch();
 
+/**
+ * Watches the underlying collection for changes using MongoDB change streams.
+ * @param {any} change
+ */
 userStream.on('change', (change) => {
   io.emit('user-change');
 });
