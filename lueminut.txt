@@ -1,0 +1,138 @@
+// GET /api/rooms
+[
+    {
+        "roomId": "1",
+        "roomName": "Animu",
+        "id": "5fd097310e9c0638b81e9a6f"
+    },
+    {
+        "roomId": "2",
+        "roomName": "ATK",
+        "id": "5fd1c88a4a47d9590b1ce72b"
+    },
+    {
+        "roomId": "3",
+        "roomName": "General (Kenobi)",
+        "id": "5fd1c88625c2731219df9837"
+    }
+]
+// GET /api/rooms/5fd097310e9c0638b81e9a6f
+{
+    "roomId": "1",
+    "roomName": "Animu",
+    "id": "5fd097310e9c0638b81e9a6f"
+}
+// GET /api/users
+[
+    {
+        "_id": "5fd1eb216d302b3760569bb9",
+        "username": "batman",
+        "room": null,
+        "id": "5fd1eb216d302b3760569bb9"
+    },
+    {
+        "_id": "5fd1ebe20ef6253aaf57df11",
+        "username": "superman",
+        "room": null,
+        "id": "5fd1ebe20ef6253aaf57df11"
+    },
+    {
+        "_id": "5fd1fc0963fe0100174bd974",
+        "username": "joni",
+        "room": null,
+        "id": "5fd1fc0963fe0100174bd974"
+    },
+]
+// GET /api/users/5fd1eb216d302b3760569bb9
+{
+    "_id": "5fd1eb216d302b3760569bb9",
+    "username": "batman",
+    "room": null,
+    "id": "5fd1eb216d302b3760569bb9"
+}
+// GET /api/messages?id=5fd097310e9c0638b81e9a6f
+[
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "asd",
+        "date": "10:54",
+        "user": "jonitesti2",
+        "id": "5fd1e22a26430c00179206b3"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "https://i.pinimg.com/736x/57/b8/45/57b8455ba12b277fa8ce849547706962.jpg",
+        "date": "10:55",
+        "user": "lmfao",
+        "id": "5fd1e26e26430c00179206b5"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "Sääli :'(",
+        "date": "10:55",
+        "user": "mrnice",
+        "id": "5fd1e28f26430c00179206b7"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "jep :( mut muuten kyl aika siide",
+        "date": "10:55",
+        "user": "lmfao",
+        "id": "5fd1e29a26430c00179206b8"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "Tää on kiva kyl! Ja mahtavaa ku pääsee ihan oikeesti testaa! :D",
+        "date": "10:56",
+        "user": "mrnice",
+        "id": "5fd1e2ac26430c00179206b9"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "jep!!!",
+        "date": "10:56",
+        "user": "lmfao",
+        "id": "5fd1e2b726430c00179206ba"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "Ei valvottu... Kjeh kjeh...",
+        "date": "10:56",
+        "user": "mrnice",
+        "id": "5fd1e2bd26430c00179206bb"
+    },
+    {
+        "roomId": "5fd097310e9c0638b81e9a6f",
+        "content": "joo koodii",
+        "date": "10:57",
+        "user": "lmfao",
+        "id": "5fd1e2e126430c00179206bc"
+    }
+]
+
+// POST /api/messages
+
+// body
+{
+    "id": ...,
+    "roomId": ...,
+    "content": ...,
+    "date": new Date(),
+    "user": "username",
+}
+
+// POST /api/login
+
+// body
+{
+    "username": "foobar",
+    "password": "salasana",
+}
+
+// POST /api/users
+
+// body
+{
+    "username": "foobar",
+    "password": "salasana",
+}
