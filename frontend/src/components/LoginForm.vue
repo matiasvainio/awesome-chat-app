@@ -40,13 +40,13 @@
 </template>
 
 <script>
-/**
- * Handles user login.
- */
-
 import userService from '@/services/users';
 import authService from '@/services/auth';
 import utils from '../utils/utils';
+
+/**
+ * Handles user login.
+ */
 
 export default {
   data: function() {

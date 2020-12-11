@@ -44,12 +44,12 @@
 </template>
 
 <script>
-/**
- * Component which represents single message.
- */
 import utils from '@/utils/utils';
 import messageService from '@/services/messages';
 
+/**
+ * Component which represents single message.
+ */
 export default {
   name: 'Message',
   props: {

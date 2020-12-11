@@ -19,12 +19,12 @@
 </template>
 
 <script>
+import utils from '@/utils/utils';
+
 /**
  * Component which handles new message creation. This has a simple form with one input field
  * and a button.
  */
-import utils from '@/utils/utils';
-
 export default {
   name: 'MessageForm',
   emits: ['add-message'],

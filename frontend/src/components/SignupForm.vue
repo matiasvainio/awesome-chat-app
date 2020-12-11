@@ -44,12 +44,13 @@
 </template>
 
 <script>
-/**
- * Component that handles user sign up operations.
- */
 import userService from '@/services/users';
 import authService from '@/services/auth';
 import utils from '@/utils/utils';
+
+/**
+ * Component that handles user sign up operations.
+ */
 
 export default {
   data: function() {
