@@ -1,13 +1,13 @@
 const express = require('express');
-const router = express.Router();
+const messageRouter = express.Router();
 const Message = require('../models/message.js');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-router.use(mongoSanitize());
+messageRouter.use(bodyParser.urlencoded({ extended: true }));
+messageRouter.use(bodyParser.json());
+messageRouter.use(mongoSanitize());
 
 const getTokenFrom = (req) => {
   const authorization = req.get('authorization');
@@ -19,7 +19,14 @@ const getTokenFrom = (req) => {
 };
 
 /* GET ALL MESSAGES */
-router.get('/', async (req, res, next) => {
+/**
+ * Gets all messages.
+ * @name messageRouter_get_All
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ * @example router.get('/',
+ */
+messageRouter.get('/', async (req, res, next) => {
   const token = getTokenFrom(req);
   if (!token) {
     res.sendStatus(401);
@@ -37,7 +44,14 @@ router.get('/', async (req, res, next) => {
 });
 
 /* GET SINGLE MESSAGE BY ID */
-router.get('/:id', async (req, res, next) => {
+/**
+ * Gets single message by id.
+ * @name messageRouter_get_One
+ * @param {string} req Express request
+ * @param {string} res Express result
+ * @example router.get('/:id',
+ */
+messageRouter.get('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
   const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -52,7 +66,14 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* SAVE MESSAGE */
-router.post('/', async (req, res, next) => {
+/**
+ * Saves message to database.
+ * @name messageRouter_post_Message
+ * @param {string} req Express request
+ * @param {string} res Express result
+ * @example router.post('/',
+ */
+messageRouter.post('/', async (req, res, next) => {
   const token = getTokenFrom(req);
 
   const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -67,7 +88,14 @@ router.post('/', async (req, res, next) => {
 });
 
 /* UPDATE MESSAGE */
-router.put('/:id', async (req, res, next) => {
+/**
+ * Updates selected message.
+ * @name messageRouter_put_selected_Message
+ * @param {string} req Express request
+ * @param {string} res Express result
+ * @example router.put('/:id',
+ */
+messageRouter.put('/:id', async (req, res, next) => {
   const token = getTokenFrom(req);
 
   const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -88,7 +116,14 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /* DELETE MESSAGE */
-router.delete('/:id', async (req, res, next) => {
+/**
+ * Delete selected message.
+ * @name messageRouter_delete_selected_Message
+ * @param {string} req Express request
+ * @param {string} res Express result
+ * @example router.delete('/:id',
+ */
+messageRouter.delete('/:id', async (req, res, next) => {
   console.log('params', req.params);
   const token = getTokenFrom(req);
 
@@ -107,4 +142,4 @@ router.delete('/:id', async (req, res, next) => {
   );
 });
 
-module.exports = router;
+module.exports = messageRouter;
