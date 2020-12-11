@@ -11,17 +11,30 @@ usersRouter.use(bodyParser.urlencoded({ extended: true }));
 usersRouter.use(bodyParser.json());
 usersRouter.use(mongoSanitize());
 
+/**
+ * Gets all users.
+ * @name usersRouter_get_All
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ * @example usersRouter.get('/',
+ */
 usersRouter.get('/', async (req, res) => {
   // const token = req.get('authorization');
 
   // if (!token) {
   //   res.status(401).json({ error: 'not authorized' });
   // }
-
   const users = await User.find({}).populate('room', { users: 0 });
   res.json(users);
 });
 
+/**
+ * Gets one user by given id.
+ * @name usersRouter_get_One
+ * @param {string} req Express get request
+ * @param {string} res Express get result
+ * @example usersRouter.get('/:id',
+ */
 usersRouter.get('/:id', async (req, res) => {
   try {
     const returned = await User.findById(req.params.id);
@@ -31,6 +44,14 @@ usersRouter.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * Add new user to database based on data from express post method.
+ * @name usersRouter_post_One
+ * @param {string} req Express post request
+ * @param {string} res Express post result
+ * @param {express-validator} validateUser Custom express validator for username and password
+ * @example usersRouter.post('/',
+ */
 usersRouter.post('/', validateUser, async (req, res) => {
   const { body } = req;
 
@@ -53,6 +74,13 @@ usersRouter.post('/', validateUser, async (req, res) => {
   });
 });
 
+/**
+ * Updates user based on data from express put method.
+ * @name usersRouter_put_One
+ * @param {string} req Express put request
+ * @param {string} res Express put result
+ * @example usersRouter.put('/:id',
+ */
 usersRouter.put('/:id', async (req, res) => {
   // Todo err handling
   const { body } = req;
@@ -66,6 +94,13 @@ usersRouter.put('/:id', async (req, res) => {
   }
 });
 
+/**
+ * Deletes user based on data from express delete method.
+ * @name usersRouter_delete_One
+ * @param {string} req Express delete request
+ * @param {string} res Express delete result
+ * @example usersRouter.delete('/:id',
+ */
 usersRouter.delete('/:id', async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
   return res.status(204).end();

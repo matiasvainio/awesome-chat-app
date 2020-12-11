@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
+/**
+ * Creates mongoose schema for User model.
+ * @param {string} username Username given by user. Has to be unique
+ * @param {string} passwordHash Hashed password
+ * @param {mongoose.Schema.Types.ObjectId} room Current room of the user
+ */
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
