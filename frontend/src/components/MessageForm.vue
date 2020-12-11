@@ -1,24 +1,17 @@
 <template>
-  <div
-    v-if="user"
-    class="message-form"
-  >
-    <form
-      autocomplete="off"
-      @submit.prevent="handleForm"
-    >
-      <input
-        v-model="formContent"
-        name="content"
-        type="text"
-        placeholder="Message.."
-      >
+  <div v-if="user" class="message-form">
+    <form autocomplete="off" @submit.prevent="handleForm">
+      <input v-model="formContent" name="content" type="text" placeholder="Message.." />
       <button>Send</button>
     </form>
   </div>
 </template>
 
 <script>
+/**
+ * Component which handles new message creation. This has a simple form with one input field
+ * and a button.
+ */
 import utils from '@/utils/utils';
 
 export default {
@@ -38,6 +31,13 @@ export default {
     this.date = new Date();
   },
   methods: {
+    /**
+     * Main function which handles the form submit. Creates new message with id, roomId, content, date
+     * and user.
+     *
+     * Sends add-message event
+     * @property {object} newMessage The created message object.
+     */
     handleForm() {
       const newMessage = {
         id: String,
@@ -50,6 +50,11 @@ export default {
       this.$emit('add-message', newMessage);
       this.formContent = '';
     },
+    /**
+     * Creates a time string from the current date.
+     *
+     * @returns current time.
+     */
     createDateString() {
       const minutes = this.date.getMinutes();
       const hours = this.date.getHours();

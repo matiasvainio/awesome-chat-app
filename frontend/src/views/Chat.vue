@@ -2,11 +2,7 @@
   <div class="chat">
     <div class="users">
       <h3>Users:</h3>
-      <div
-        v-for="userItem in users"
-        :key="userItem.id"
-        class="user-item scale-in-center"
-      >
+      <div v-for="userItem in users" :key="userItem.id" class="user-item scale-in-center">
         {{ userItem.username }}
       </div>
     </div>
@@ -16,10 +12,7 @@
       @remove-message="removeMessage"
       @modify-message="modifyMessage"
     />
-    <MessageForm
-      class="message-form"
-      @add-message="addMessage"
-    />
+    <MessageForm class="message-form" @add-message="addMessage" />
   </div>
 </template>
 
@@ -71,21 +64,40 @@ export default {
     this.socket.off('user-change');
   },
   methods: {
+    /**
+     * Adds message to database and to messages state.
+     * @param{object} message Message to be added to db.
+     */
     async addMessage(message) {
       const newMessage = await messageService.create(message);
       this.messages = [...this.messages, message];
     },
+    /**
+     * Gets messages from the database and adds them to messages state.
+     */
     async getMessages() {
       const m = await messageService.getAll(this.$route.params.id);
       this.messages = m;
     },
+    /**
+     * Removes message from the database.
+     * @param{string} id Id of the message to be removed.
+     */
     async removeMessage(id) {
       await messageService.remove(id);
       await this.getMessages();
     },
+    /**
+     * Modifies targeted message in the database.
+     * @param{object} message Message to be modified.
+     */
     async modifyMessage(message) {
       await messageService.modify(message);
     },
+    /**
+     * Sets up current room on user connect. Adds current rooms users to this.users
+     * state by filtering users based on their id. Sets up current user state.
+     */
     async setupRoom() {
       const users = await userService.getAll();
       this.users = users.filter((user) => {
@@ -97,11 +109,17 @@ export default {
       });
       this.user = this.users.filter((user) => user.id === utils.getUser().data.id);
     },
+    /**
+     * Removes current user from users collection.
+     */
     async removeUserFromRoom() {
       const newUser = this.user[0];
       newUser.room = null;
       await userService.modify(newUser);
     },
+    /**
+     * Modifies current user by adding room id to it's room key.
+     */
     async addRoomTouser() {
       const currUser = await userService.getUser(utils.getUser().data.id);
       const currRoom = this.$route.params.id;

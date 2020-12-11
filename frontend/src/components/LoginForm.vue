@@ -5,20 +5,13 @@
       <div>
         <label for="username">username</label>
         <div>
-          <input
-            id="username"
-            v-model="username"
-            type="text"
-          >
+          <input id="username" v-model="username" type="text" />
         </div>
       </div>
       <label for="password">password</label>
       <div id="passwordDiv">
         <div>
-          <input
-            v-model="password"
-            :type="passwordFieldType"
-          >
+          <input v-model="password" :type="passwordFieldType" />
         </div>
         <button
           id="togglePass"
@@ -30,22 +23,22 @@
       </div>
       <button>login</button>
     </form>
-    <div
-      v-if="showNotification"
-      class="login-notification"
-    >
+    <div v-if="showNotification" class="login-notification">
       <h3>Wrong username or password</h3>
     </div>
   </div>
 </template>
 
 <script>
+/**
+ * Handles user login.
+ */
+
 import userService from '@/services/users';
 import authService from '@/services/auth';
 import utils from '../utils/utils';
 
 export default {
-  components: {},
   data: function() {
     return {
       users: [],
@@ -56,13 +49,10 @@ export default {
       showNotification: false,
     };
   },
-  mounted() {
-    // this.getUsers();
-  },
   methods: {
-    async getUsers() {
-      this.users = await userService.getAll();
-    },
+    /**
+     * Handles user login. Converts username and password into lowercase. Sets user to window local storage.
+     */
     async handleLogin() {
       try {
         const usernameLowerCase = this.username.toLowerCase();
@@ -80,6 +70,9 @@ export default {
         }, 2000);
       }
     },
+    /**
+     * Toggles whether the password is shown to the user.
+     */
     toggleVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
       this.eyeClass = this.eyeClass === 'fa fa-eye' ? 'fa fa-eye-slash' : 'fa fa-eye';

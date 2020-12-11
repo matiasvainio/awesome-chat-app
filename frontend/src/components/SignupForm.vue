@@ -13,7 +13,7 @@
               pattern="[A-Za-z1-9]{2,}"
               title="Must contain atleast two characters. No special characters!"
               required
-            >
+            />
           </div>
         </div>
         <div>
@@ -27,7 +27,7 @@
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
               required
-            >
+            />
             <button
               id="togglePass"
               type="button"
@@ -44,6 +44,9 @@
 </template>
 
 <script>
+/**
+ * Component that handles user sign up operations.
+ */
 import userService from '@/services/users';
 import authService from '@/services/auth';
 import utils from '@/utils/utils';
@@ -58,6 +61,12 @@ export default {
     };
   },
   methods: {
+    /**
+     * Handles sign up forms submit action.
+     *
+     * Creates new user object which gets passed to database. After creation
+     * the user is saved to browser's local storage. User is logged in.
+     */
     async handleSignup() {
       const newUser = {
         username: this.username,
@@ -74,6 +83,9 @@ export default {
       utils.setUser(user);
       this.$router.push('/home');
     },
+    /**
+     * Toggles whether the password is shown to the user.
+     */
     toggleVisibility() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
       this.eyeClass = this.eyeClass === 'fa fa-eye' ? 'fa fa-eye-slash' : 'fa fa-eye';

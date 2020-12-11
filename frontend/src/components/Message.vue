@@ -1,21 +1,12 @@
 <template>
   <div :class="isUser ? 'message-container-user' : 'message-container-notuser'">
-    <!-- <div class="icon"></div> -->
     <div
       :class="isUser ? 'message-user' : 'message-notuser'"
       class="scale-in-bottom"
       @click="showMenuButton"
     >
-      <form
-        class="modify-form"
-        @submit.prevent="handleModify"
-      >
-        <input
-          v-if="showInput"
-          ref="modInput"
-          type="text"
-          :value="placeholder"
-        >
+      <form class="modify-form" @submit.prevent="handleModify">
+        <input v-if="showInput" ref="modInput" type="text" :value="placeholder" />
       </form>
       <div v-if="!showInput">
         {{ message.content }}
@@ -26,18 +17,10 @@
       <div class="date">
         {{ message.date }}
       </div>
-      <button
-        v-if="isUser & showMenu"
-        class="menu-button"
-        @click="removeMessage"
-      >
+      <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
         Remove
       </button>
-      <button
-        v-if="isUser & showMenu"
-        class="menu-button"
-        @click="showMod"
-      >
+      <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
         {{ mod }}
       </button>
     </div>
@@ -45,14 +28,20 @@
 </template>
 
 <script>
+/**
+ * Component which represents single message.
+ */
 import utils from '@/utils/utils';
 import messageService from '@/services/messages';
 
 export default {
   name: 'Message',
   props: {
+    /**
+     * Content of message. (user, content and date)
+     */
     message: {
-      type: String,
+      type: Object,
       default() {
         return '';
       },
@@ -68,6 +57,10 @@ export default {
     };
   },
   computed: {
+    /**
+     * Sets current the messages content as placeholder.
+     * @returns message content.
+     */
     placeholder() {
       return this.message.content;
     },
@@ -76,20 +69,32 @@ export default {
     this.alignMessages();
   },
   methods: {
+    /**
+     * Aligns messages on the page based on who sent them.
+     */
     alignMessages() {
       const user =
         utils.getUser().data.username === this.message.user
           ? (this.isUser = true)
           : (this.isUser = false);
     },
+    /**
+     * Handles remove message click. Sends remove-message event.
+     */
     removeMessage() {
       this.$emit('remove-message', this.message.id);
     },
+    /**
+     * Handles whether modify button reads modify or close.
+     */
     showMod() {
       if (this.mod === 'Close') this.mod = 'Modify';
       else this.mod = 'Close';
       this.showInput = !this.showInput;
     },
+    /**
+     * Handles modify button action. Sends modify-message event.
+     */
     handleModify() {
       const newMessage = this.message;
       newMessage.content = this.$refs.modInput.value;
@@ -98,6 +103,9 @@ export default {
       this.showInput = !this.showInput;
       this.showMenu = !this.showMenu;
     },
+    /**
+     * Handles message click. Shows menu which has remove and modify buttons.
+     */
     showMenuButton() {
       if (!this.showInput) {
         this.showMenu = !this.showMenu;

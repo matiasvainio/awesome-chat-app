@@ -1,22 +1,16 @@
 <template>
   <div class="landing">
-    <h1>Awesome Chat App</h1>
+    <h1>Awesome Chat App Beta</h1>
     <div class="landing-forms">
       <LoginForm v-if="login" />
       <SignupForm v-if="signup" />
     </div>
     <div class="buttons">
-      <button
-        id="login"
-        @click="handleShow"
-      >
+      <button id="login" @click="handleShow">
         login
       </button>
       <div>
-        <button
-          id="signup"
-          @click="handleShow"
-        >
+        <button id="signup" @click="handleShow">
           sign up
         </button>
       </div>
@@ -40,6 +34,10 @@ export default {
     };
   },
   methods: {
+    /**
+     * Handles which form (login or sign up) is shown to the user. Pressing buttons toggles
+     * between login and sign up.
+     */
     handleShow(event) {
       event.target.id === 'login' ? ((this.login = true), (this.signup = false)) : null;
       event.target.id === 'signup' ? ((this.signup = true), (this.login = false)) : null;

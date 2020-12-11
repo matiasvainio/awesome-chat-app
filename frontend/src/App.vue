@@ -1,9 +1,6 @@
 <template>
   <div class="parent-div">
-    <div
-      v-if="$route.meta.header === none"
-      id="nav"
-    >
+    <div v-if="$route.meta.header === none" id="nav">
       <div>
         <h1>Awesome Chat App Beta</h1>
       </div>
@@ -14,10 +11,7 @@
         <router-link to="/home">
           Home
         </router-link>
-        <a
-          href="#"
-          @click.prevent="logout"
-        >Logout</a>
+        <a href="#" @click.prevent="logout">Logout</a>
       </div>
     </div>
     <router-view />
@@ -41,6 +35,9 @@ export default {
     this.checkIfLoggedIn();
   },
   methods: {
+    /**
+     * Check if user is already logged in to the site.
+     */
     checkIfLoggedIn() {
       const user = window.localStorage.getItem('loggedChatAppUser');
       if (user) {
@@ -48,6 +45,9 @@ export default {
       }
     },
     logout() {
+      /**
+       * Handles logout. Clears browser localstorage and redirects user to landing page.
+       */
       authService.logout();
       this.$router.push('/');
     },
@@ -97,7 +97,6 @@ button:hover {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* height: 100vh; */
 }
 
 #nav {

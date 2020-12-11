@@ -1,15 +1,9 @@
 <template>
-  <div
-    v-if="user"
-    class="home"
-  >
+  <div v-if="user" class="home">
     <h1>Home</h1>
     <h3>Welcome {{ user }}</h3>
     <div class="room-links">
-      <div
-        v-for="room in rooms"
-        :key="room.id"
-      >
+      <div v-for="room in rooms" :key="room.id">
         <router-link :to="`/chat/${room.id}`">
           <h3>{{ room.roomName }}</h3>
         </router-link>
@@ -39,9 +33,15 @@ export default {
     this.getCurrentUser();
   },
   methods: {
+    /**
+     * Gets all available rooms from database.
+     */
     async getRooms() {
       this.rooms = await roomService.getRooms();
     },
+    /**
+     * Gets current user from the browser's local storage.
+     */
     getCurrentUser() {
       const user = utils.getUser();
       if (user) this.user = utils.getUser().data.username;

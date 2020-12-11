@@ -12,6 +12,10 @@ router.use(mongoSanitize());
 const getTokenFrom = (req) => {
   const authorization = req.get('authorization');
 
+  console.log('request', req);
+
+  console.log('authorization', authorization);
+
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     return authorization.substring(7);
   }

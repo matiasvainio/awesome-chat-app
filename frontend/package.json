@@ -28,7 +28,8 @@
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^7.0.0-0"
+    "eslint-plugin-vue": "^7.0.0-0",
+    "jsdoc-vuejs": "^3.0.9"
   },
   "eslintConfig": {
     "root": true,
