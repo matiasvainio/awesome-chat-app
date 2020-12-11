@@ -6,11 +6,17 @@
       <SignupForm v-if="signup" />
     </div>
     <div class="buttons">
-      <button id="login" @click="handleShow">
+      <button
+        id="login"
+        @click="handleShow"
+      >
         login
       </button>
       <div>
-        <button id="signup" @click="handleShow">
+        <button
+          id="signup"
+          @click="handleShow"
+        >
           sign up
         </button>
       </div>

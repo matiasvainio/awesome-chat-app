@@ -13,7 +13,7 @@
               pattern="[A-Za-z1-9]{2,}"
               title="Must contain atleast two characters. No special characters!"
               required
-            />
+            >
           </div>
         </div>
         <div>
@@ -27,7 +27,7 @@
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
               required
-            />
+            >
             <button
               id="togglePass"
               type="button"

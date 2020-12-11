@@ -1,7 +1,18 @@
 <template>
-  <div v-if="user" class="message-form">
-    <form autocomplete="off" @submit.prevent="handleForm">
-      <input v-model="formContent" name="content" type="text" placeholder="Message.." />
+  <div
+    v-if="user"
+    class="message-form"
+  >
+    <form
+      autocomplete="off"
+      @submit.prevent="handleForm"
+    >
+      <input
+        v-model="formContent"
+        name="content"
+        type="text"
+        placeholder="Message.."
+      >
       <button>Send</button>
     </form>
   </div>

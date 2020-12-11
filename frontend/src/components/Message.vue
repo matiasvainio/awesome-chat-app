@@ -5,8 +5,16 @@
       class="scale-in-bottom"
       @click="showMenuButton"
     >
-      <form class="modify-form" @submit.prevent="handleModify">
-        <input v-if="showInput" ref="modInput" type="text" :value="placeholder" />
+      <form
+        class="modify-form"
+        @submit.prevent="handleModify"
+      >
+        <input
+          v-if="showInput"
+          ref="modInput"
+          type="text"
+          :value="placeholder"
+        >
       </form>
       <div v-if="!showInput">
         {{ message.content }}
@@ -17,10 +25,18 @@
       <div class="date">
         {{ message.date }}
       </div>
-      <button v-if="isUser & showMenu" class="menu-button" @click="removeMessage">
+      <button
+        v-if="isUser & showMenu"
+        class="menu-button"
+        @click="removeMessage"
+      >
         Remove
       </button>
-      <button v-if="isUser & showMenu" class="menu-button" @click="showMod">
+      <button
+        v-if="isUser & showMenu"
+        class="menu-button"
+        @click="showMod"
+      >
         {{ mod }}
       </button>
     </div>
@@ -43,7 +59,7 @@ export default {
     message: {
       type: Object,
       default() {
-        return '';
+        return {};
       },
     },
   },

@@ -1,8 +1,14 @@
 <template>
   <div class="chat-messages">
-    <div ref="messageList" class="message-list">
+    <div
+      ref="messageList"
+      class="message-list"
+    >
       <ul>
-        <li v-for="message in messages" :key="message.id">
+        <li
+          v-for="message in messages"
+          :key="message.id"
+        >
           <Message
             :message="message"
             @remove-message="removeMessage"
