@@ -31,8 +31,8 @@ const io = require('socket.io')(server, {
 const changeStream = Message.watch();
 
 /**
- * Watches the underlying collection for changes using MongoDB change streams.
- * @param {any} change
+ * Watches the message collection for changes using MongoDB change streams.
+ * @name changeStream
  */
 changeStream.on('change', (change) => {
   io.emit('change', change.fullDocument);
@@ -41,8 +41,8 @@ changeStream.on('change', (change) => {
 const userStream = User.watch();
 
 /**
- * Watches the underlying collection for changes using MongoDB change streams.
- * @param {any} change
+ * Watches the user collection for changes using MongoDB change streams.
+ * @name userStream
  */
 userStream.on('change', (change) => {
   io.emit('user-change');
@@ -68,6 +68,12 @@ const options = {
   family: 4, // Use IPv4, skip trying IPv6
 };
 
+/**
+ * Creating a connection to MongoDB using mongoose.
+ * @name mongoose.connect
+ * @param {string} MONGODB_URI Environmental variable for database URI
+ * @param {json} options Additional options for the connection
+ */
 mongoose
   .connect(process.env.MONGODB_URI, options)
   .then(() => console.log('connection succesful'))

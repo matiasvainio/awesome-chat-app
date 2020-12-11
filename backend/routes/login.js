@@ -4,9 +4,11 @@ const loginRouter = require('express').Router();
 const User = require('../models/user');
 
 /**
- * Gets user information given by user and compares it to information form database.
+ * Gets user information given by user and compares it to information from database.
+ * @name loginRouter_post
  * @param {string} req Express request
  * @param {string} res Express result
+ * @example loginRouter.post('/',
  */
 loginRouter.post('/', async (req, res) => {
   const { body } = req;
